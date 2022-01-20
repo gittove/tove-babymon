@@ -12,17 +12,12 @@ public class AudioManager : MonoBehaviour
         GetStaticInstance();
         CreateAudioSources();
     }
-    private void Reset()
-    {
-        GetStaticInstance();
-    }
+
     private void GetStaticInstance()
     {
-        _instance = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-
-        if (_instance == null)
-            _instance = this;
+        _instance = this;
     }
+
     private void CreateAudioSources()
     {
         AudioMixer mixer = Resources.Load("MasterMixer") as AudioMixer;
