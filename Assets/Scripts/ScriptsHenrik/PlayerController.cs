@@ -5,7 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 10f;
+    
+    /*
+    When the player is close to the point it is moving to, 
+    input for movement is possible again
+    */
+    [SerializeField] private float distanceUntilInputEnabled = 0.05f;
     public Transform movePoint;
     
     void Start()
@@ -13,7 +19,6 @@ public class PlayerController : MonoBehaviour
         movePoint.parent = null;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -23,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
         
-        if (Vector3.Distance(transform.position, movePoint.position) < 0.05f)
+        if (Vector3.Distance(transform.position, movePoint.position) < distanceUntilInputEnabled)
         {
             if(Input.GetKey(KeyCode.W))
             {

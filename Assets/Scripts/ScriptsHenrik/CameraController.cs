@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 {
     public Transform playerTransform;
     [SerializeField] private float smoothSpeed = 3f;
-    private Vector3 offset = new Vector3( 0, 23, -9);
+    [SerializeField] private Vector3 offset = new Vector3( 0, 23, -9);
 
     void LateUpdate() 
     {
