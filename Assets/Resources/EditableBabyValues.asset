@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a0cf288ec1ae042b24003265152582, type: 3}
   m_Name: EditableBabyValues
   m_EditorClassIdentifier: 
-  needTimer: 62
-  decreaseHPTimer: 10.9
+  needTimer: 5
   maxHP: 1
-  decreaseHPValue: 6
-  maxHunger: 0
-  maxEnergy: 0
-  maxHygiene: 0
+  decreaseHPTimer: 0.01
+  maxHunger: 8
+  maxComfort: 0
+  maxHygiene: 32
