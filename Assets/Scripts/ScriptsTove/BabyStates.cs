@@ -1,6 +1,6 @@
 public enum BabyState
 {
     Happy,
-    Hungry,
+    Neutral,
     Sad
 }
