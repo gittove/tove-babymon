@@ -15,6 +15,8 @@ public class MouseHoover : MonoBehaviour
     
     bool hoover = true;
 
+    private bool isPause;
+
     
     [SerializeField] 
     private ScriptableEvent<Vector3> onHooverOverBaby;
@@ -34,7 +36,7 @@ public class MouseHoover : MonoBehaviour
         // Change the color of the GameObject to red when the mouse is over GameObject
         m_Renderer.material.color = m_MouseOverColor;
         
-        if (hoover)
+        if (hoover && !isPause)
         {
             onHooverOverBaby.RaiseEvent(transform.position);
             Debug.Log("Baby need 1: Food");
@@ -51,4 +53,5 @@ public class MouseHoover : MonoBehaviour
         // Reset the color of the GameObject back to normal
         m_Renderer.material.color = m_OriginalColor;
     }
+    
 }
