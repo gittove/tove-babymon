@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     */
     [SerializeField] private float distanceUntilInputEnabled = 0.05f;
     public Transform movePoint;
-    private Vector3 oldMovePosition;
-    private Vector3 initialFacingDir;
     
     void Start()
     {
@@ -30,7 +28,6 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-        Vector3 oldMovePosition = movePoint.position;
         if (Vector3.Distance(transform.position, movePoint.position) < distanceUntilInputEnabled)
         {
             if(Input.GetKey(KeyCode.W))

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 973370262}
   - component: {fileID: 6760685326769095830}
+  - component: {fileID: 837641056}
   m_Layer: 0
   m_Name: PlayerMovePoint
   m_TagString: Untagged
@@ -44,6 +45,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &837641056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973370261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93393d717bee824ca4496f98b78ecc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1670348226
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,5 +264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  rotationSpeed: 20.41
   distanceUntilInputEnabled: 0.05
   movePoint: {fileID: 973370262}
