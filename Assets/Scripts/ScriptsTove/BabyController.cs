@@ -56,7 +56,7 @@ public class BabyController : MonoBehaviour
     {
         _newNeedTimer = _babyValues.needTimer;
         _babyHappiness = _babyValues.maxHP;
-        _happyDecreaseValue = _babyValues.decreaseHPValue;
+        _happyDecreaseValue = 1;
         _timeUntilDecrease = _babyValues.decreaseHPTimer;
     }
 }
