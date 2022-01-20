@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: EditableBabyValues
   m_EditorClassIdentifier: 
   needTimer: 5
-  maxHP: 1
-  decreaseHPTimer: 0.01
-  maxHunger: 8
-  maxComfort: 0
-  maxHygiene: 32
+  maxHP: 100
+  decreaseHPMultiplier: 0.222
+  minHunger: 70
+  maxHunger: 100
+  minComfort: 72
+  maxComfort: 100
+  minLove: 73
+  maxLove: 100
+  decreaseStatsMultiplier: 0.292
