@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7f7e584cf5c9e4786f4e4c8f575431, type: 3}
   m_Name: MoodTicks
   m_EditorClassIdentifier: 
-  objectSize: 0
-  wellbeingSize: 0
-  loveSize: 0
-  objectTicks: 
-  wellbeingTicks: 
-  loveTicks: 
+  objectTicks: 6100000032000000
+  wellbeingTicks: 5f00000032000000
+  loveTicks: 5d00000032000000

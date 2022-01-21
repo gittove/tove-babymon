@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 3951351875096127798}
   - component: {fileID: 3951351875096127799}
   - component: {fileID: -984650802259922513}
+  - component: {fileID: 7199384422920153580}
+  - component: {fileID: 4387755162133729251}
+  - component: {fileID: 6805910908032581625}
   m_Layer: 0
   m_Name: Baby
   m_TagString: Untagged
@@ -124,9 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _babyValues: {fileID: 11400000, guid: d44c6f085a89f4845b60b552a52136b9, type: 2}
-  _objectEventListener: {fileID: 0}
-  _wellbeingEventListener: {fileID: 0}
-  _loveEventListener: {fileID: 0}
 --- !u!114 &-984650802259922513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +148,87 @@ MonoBehaviour:
   _loveEvent: {fileID: 11400000, guid: 89985a6d690d82f4582f77a66107493f, type: 2}
   _babyValues: {fileID: 11400000, guid: d44c6f085a89f4845b60b552a52136b9, type: 2}
   _tickValues: {fileID: 11400000, guid: f1a768a7b093b0c438b82e1462697462, type: 2}
+--- !u!114 &7199384422920153580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951351875096127796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0944b1cd1d60d5a42956eeb3a71f2181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventNoPayload: {fileID: 11400000, guid: c02f48dfde85e154fb53fbb90c0a4577, type: 2}
+  responseNoPayload:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3951351875096127799}
+        m_TargetAssemblyTypeName: BabyController, Assembly-CSharp
+        m_MethodName: OnObjectMoodEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4387755162133729251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951351875096127796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0944b1cd1d60d5a42956eeb3a71f2181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventNoPayload: {fileID: 11400000, guid: f532f8b4d591e1e4f9c80df512cebff5, type: 2}
+  responseNoPayload:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3951351875096127799}
+        m_TargetAssemblyTypeName: BabyController, Assembly-CSharp
+        m_MethodName: OnWellbeingMoodEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6805910908032581625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951351875096127796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0944b1cd1d60d5a42956eeb3a71f2181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventNoPayload: {fileID: 11400000, guid: 89985a6d690d82f4582f77a66107493f, type: 2}
+  responseNoPayload:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3951351875096127799}
+        m_TargetAssemblyTypeName: BabyController, Assembly-CSharp
+        m_MethodName: OnLoveMoodEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
