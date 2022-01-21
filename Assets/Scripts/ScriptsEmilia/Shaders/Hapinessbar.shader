@@ -9,6 +9,8 @@ Shader "Unlit/Hapinessbar"
         _BarBackgroundColor ("Happinessbar background color", Color) = (0,0,0,0)
         _Transparency ("Color transparency", Range(0,1)) = 1
         _BorderSize("Border Size", Range(0,0.5)) = 0.5
+        
+        
     }
     SubShader
     {
@@ -48,6 +50,7 @@ Shader "Unlit/Hapinessbar"
             float3 _BarBackgroundColor;
             float _Transparency;
             float _BorderSize;
+            uniform float _HappinessValue;
 
             Interpolators vert (MeshData v)
             {
@@ -64,6 +67,7 @@ Shader "Unlit/Hapinessbar"
 
             float4 frag (Interpolators i) : SV_Target
             {
+                
                 //set up coord system
                 float2 coords = i.uv;
                 coords.x *= 8;

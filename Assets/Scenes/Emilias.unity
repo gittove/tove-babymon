@@ -123,6 +123,102 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &676376076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 676376080}
+  - component: {fileID: 676376079}
+  - component: {fileID: 676376078}
+  - component: {fileID: 676376077}
+  m_Layer: 0
+  m_Name: Happinessbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!64 &676376077
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676376076}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &676376078
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676376076}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: afcd227b4cae552438775fbe6a95da16, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &676376079
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676376076}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &676376080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676376076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.475, y: 1.35, z: -1.53}
+  m_LocalScale: {x: 1, y: 0.125, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &717496098
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +502,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Baby need
       objectReference: {fileID: 0}
+    - target: {fileID: 689331308758193672, guid: d3da09aeaa3fd0945ba22e4bea21ddb7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 689331308758193676, guid: d3da09aeaa3fd0945ba22e4bea21ddb7, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -572,9 +672,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5915575522727048019, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: responsePayload.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915575522727048019, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: responsePayload.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915575522727048019, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: responsePayload.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915575522727048019, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: responsePayload.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915575522727048019, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: responsePayload.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915575522727048019, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: responsePayload.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameTimer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915575522727048019, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: responsePayload.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5915575523392729253, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915575523392729274, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.814056
       objectReference: {fileID: 0}
     - target: {fileID: 5915575524289318202, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -583,6 +715,10 @@ PrefabInstance:
     - target: {fileID: 5915575524328417561, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915575524328417566, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.814056
       objectReference: {fileID: 0}
     - target: {fileID: 5915575524654594595, guid: 84394039b1d78ec41b3f8b1b8be5a249, type: 3}
       propertyPath: m_AnchoredPosition.x
