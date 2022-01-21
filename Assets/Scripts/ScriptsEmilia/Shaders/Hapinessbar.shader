@@ -3,7 +3,7 @@ Shader "Unlit/Hapinessbar"
     Properties
     {
         [NoScaleOffset]_MainTex ("Texture", 2D) = "black" {}
-        _Happiness ("Happiness", Range(0,1)) = 1
+        _HappinessValue ("Happiness", Range(0,1)) = 1
         _LowHappinessColor ("Low happiness color", Color) = (0,0,0,0)
         _FullHappinessColor ("Full happiness color", Color) = (0,0,0,0)
         _BarBackgroundColor ("Happinessbar background color", Color) = (0,0,0,0)
@@ -67,7 +67,8 @@ Shader "Unlit/Hapinessbar"
 
             float4 frag (Interpolators i) : SV_Target
             {
-                _HappinessValue / 100;
+                _HappinessValue *= 0.01;
+                
                 //set up coord system
                 float2 coords = i.uv;
                 coords.x *= 8;
@@ -97,8 +98,8 @@ Shader "Unlit/Hapinessbar"
                 if (_HappinessValue > 0.9)
                 {
                     //math for sparkle???
-                    float flash = cos(_Time.y * 4) * 0.4 + 1;
-                    happinessbarColor *= flash;
+                    // float flash = cos(_Time.y * 4) * 0.4 + 1;
+                    // happinessbarColor *= flash;
                 }
                 
                 return float4(happinessbarColor * happinessbarMask * borderMask, 1);
