@@ -3,8 +3,8 @@ using UnityEngine;
 public class BabyController : MonoBehaviour
 {
     private float _timeUntilDecrease;
-    private int _babyHappiness;
-    private int _happyDecreaseValue;
+    private float _babyHappiness;
+    private float _happyDecreaseValue;
     
     [SerializeField] private BabyValuesScriptableObject _babyValues;
     
@@ -12,14 +12,17 @@ public class BabyController : MonoBehaviour
     private BabyStateMachine _stateMachine;
     private MeshRenderer _meshRenderer;
     private Pointer _pointer;
+    private Material _happinessBar;
 
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
         _stateMachine = new BabyStateMachine(this);
         _pointer = GetComponent<Pointer>();
+        _happinessBar = GetComponentInChildren<Material>();
 
         SetBabyValues();
+        UpdateHappinessBar();
         ResetTimer();
     }
 
@@ -57,5 +60,10 @@ public class BabyController : MonoBehaviour
         _babyHappiness = _babyValues.maxHP;
         _happyDecreaseValue = 1;
         _timeUntilDecrease = _babyValues.decreaseHPMultiplier;
+    }
+
+    private void UpdateHappinessBar()
+    {
+        _happinessBar.SetFloat("_HappinessValue", _babyHappiness);
     }
 }
