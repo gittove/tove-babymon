@@ -4,18 +4,22 @@ public class BabyStateMachine
 {
     public BabyNeeds currentNeed;
     
-    // TODO three different stacks
-    private Stack<BabyNeeds> _needStack;
+    private Stack<BabyNeeds> _objectStack;
+    private Stack<BabyNeeds> _wellbeingStack;
+    private Stack<BabyNeeds> _loveStack;
     private BabyController _babyController;
     private NeedGenerator _generator;
 
     public BabyStateMachine(BabyController controller)
     {
+        // TODO evaluate if the controller is actually neccessary?
         _babyController = controller;
-        
-        _needStack = new Stack<BabyNeeds>();
+
+        _objectStack = new Stack<BabyNeeds>();
+        _wellbeingStack = new Stack<BabyNeeds>();
+        _loveStack = new Stack<BabyNeeds>();
         currentNeed = BabyNeeds.None;
-        _needStack.Push(currentNeed);
+        _loveStack.Push(currentNeed);
         
         _generator = new NeedGenerator();
     }
@@ -24,54 +28,73 @@ public class BabyStateMachine
     {
         BabyNeeds item;
         item = _generator.GetObjectItem();
-        SetNewState(item);
+        SetNewState(item, _objectStack);
     }
     
     public void SetLove()
     {
         BabyNeeds item;
         item = _generator.GetLoveItem();
-        SetNewState(item);
+        SetNewState(item, _loveStack);
     }
 
     public void SetWellbeing()
     {
         BabyNeeds item;
         item = _generator.GetWellbeingItem();
-        SetNewState(item);
+        SetNewState(item, _wellbeingStack);
     }
     
-    public void SetNewState(BabyNeeds newNeed)
+    public void SetNewState(BabyNeeds newNeed, Stack<BabyNeeds> stack)
     {
-        PushState(currentNeed);
+        PushState(currentNeed, stack);
         
         // this does not belong here: newNeed = _generator.GetItem();
         currentNeed = newNeed;
     }
 
-    public void ReturnToPreviousState()
+    public void ReturnObjectState()
     { 
-        _generator.ReturnItem(_needStack.Peek());
-        TryPopStack();
-        currentNeed = _needStack.Peek();
+        _generator.ReturnItem(_objectStack.Peek());
+        TryPopStack(_objectStack);
+        currentNeed = _objectStack.Peek();
+        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
+    }
+    
+    public void ReturnWellbeingState()
+    { 
+        _generator.ReturnItem(_wellbeingStack.Peek());
+        TryPopStack(_wellbeingStack);
+        currentNeed = _wellbeingStack.Peek();
+        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
+    }
+    
+    public void ReturnLoveState()
+    { 
+        _generator.ReturnItem(_loveStack.Peek());
+        TryPopStack(_loveStack);
+        currentNeed = _loveStack.Peek();
         // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
     }
 
-    public void TryPopStack()
+    public Stack<BabyNeeds> TryPopStack(Stack<BabyNeeds> stack)
     {
-        if (_needStack.Count > 1)
+        if (stack.Count > 1)
         {
-            _needStack.Pop();
+            stack.Pop();
         }
+
+        return stack;
     }
 
-    public void PushState(BabyNeeds needsToStack)
+    public Stack<BabyNeeds> PushState(BabyNeeds needsToStack, Stack<BabyNeeds> stack)
     {
-        if (needsToStack == _needStack.Peek())
+        if (needsToStack == stack.Peek())
         {
-            return;
+            return stack;
         }
 
-        _needStack.Push(needsToStack);
+        stack.Push(needsToStack);
+        return stack;
     }
 }

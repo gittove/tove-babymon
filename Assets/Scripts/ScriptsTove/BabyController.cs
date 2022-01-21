@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class BabyController : MonoBehaviour
 {
-    private float _newNeedTimer;
     private float _timeUntilDecrease;
     private int _babyHappiness;
     private int _happyDecreaseValue;
@@ -23,23 +22,7 @@ public class BabyController : MonoBehaviour
         SetBabyValues();
         ResetTimer();
     }
-/*
-    private void Update()
-    {
-        _needTimer += Time.deltaTime;
-        
-        if (_needTimer > _newNeedTimer)
-        {
-            //debugging
-            _stateMachine.SetObject();
-            Debug.Log("New need:" + _stateMachine.currentNeed);
-            _meshRenderer.material.SetColor("_Color", Color.cyan);
-            //end of debugging
-            
-            ResetTimer();
-        }
-    }
-*/
+
     public void OnObjectMoodEvent()
     {
         _stateMachine.SetObject();
@@ -61,7 +44,7 @@ public class BabyController : MonoBehaviour
         Debug.Log("baby all good!");
         //end of debugging
         
-        _stateMachine.ReturnToPreviousState();
+        _stateMachine.ReturnObjectState();
     }
 
     private void ResetTimer()
@@ -71,7 +54,6 @@ public class BabyController : MonoBehaviour
 
     private void SetBabyValues()
     {
-        _newNeedTimer = _babyValues.needTimer;
         _babyHappiness = _babyValues.maxHP;
         _happyDecreaseValue = 1;
         _timeUntilDecrease = _babyValues.decreaseHPMultiplier;

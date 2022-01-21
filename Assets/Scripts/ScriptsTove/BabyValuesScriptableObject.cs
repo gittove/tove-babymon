@@ -3,8 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new Editable Baby Values SO", menuName = "ScriptableObjects/Baby")]
 public class BabyValuesScriptableObject : ScriptableObject
 {
-    [Header("Baby's internal timer until baby gets new need (in seconds):")]
-    [Range (1f,240f)] [SerializeField] public float needTimer;
     [Header("Max happiness points:")]
     [Range(1, 100)] [SerializeField] public int maxHP;
     [Header("Multiplier for the decreasing happiness points.:")]
