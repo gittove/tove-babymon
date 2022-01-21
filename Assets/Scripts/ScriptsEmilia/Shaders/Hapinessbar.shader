@@ -8,6 +8,7 @@ Shader "Unlit/Hapinessbar"
         _FullHappinessColor ("Full happiness color", Color) = (0,0,0,0)
         _BarBackgroundColor ("Happinessbar background color", Color) = (0,0,0,0)
         _Transparency ("Color transparency", Range(0,1)) = 1
+        _BorderSize("Border Size", Range(0,0.5)) = 0.5
     }
     SubShader
     {
@@ -46,6 +47,7 @@ Shader "Unlit/Hapinessbar"
             float3 _FullHappinessColor;
             float3 _BarBackgroundColor;
             float _Transparency;
+            float _BorderSize;
 
             Interpolators vert (MeshData v)
             {
@@ -62,7 +64,20 @@ Shader "Unlit/Hapinessbar"
 
             float4 frag (Interpolators i) : SV_Target
             {
+                //set up coord system
+                float2 coords = i.uv;
+                coords.x *= 8;
+                //rounded corner clipping
+                float2 pointOnLineSeg = float2(clamp(coords.x, 0.5, 7.5), 0.5);
+                float sdf = distance(coords, pointOnLineSeg) *2 -1;
+                clip(-sdf);
+
+                float borderSdf = sdf + _BorderSize;
+
+                float pd = fwidth(borderSdf); //screen space partial derivative
+                float borderMask = 1-saturate(borderSdf/pd);
                 
+                //return float4(borderMask.xxx,1);
                 //Use texture
                 //Mask, happiness more than current coord being rendered
                 float happinessbarMask = _Happiness > i.uv.x; 
@@ -75,9 +90,14 @@ Shader "Unlit/Hapinessbar"
                     float flash = cos(_Time.y * 4) * 0.4 + 1;
                     happinessbarColor *= flash;
                 }
+                if (_Happiness > 0.9)
+                {
+                    //math for sparkle???
+                    float flash = cos(_Time.y * 4) * 0.4 + 1;
+                    happinessbarColor *= flash;
+                }
                 
-                
-                return float4(happinessbarColor * happinessbarMask, 1);
+                return float4(happinessbarColor * happinessbarMask * borderMask, 1);
             }
             ENDCG
         }
