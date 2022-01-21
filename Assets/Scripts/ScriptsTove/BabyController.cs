@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 
 public class BabyController : MonoBehaviour
 {
     private float _timeUntilDecrease;
-    private float _babyHappiness;
+    [SerializeField] private float _babyHappiness;
     private float _happyDecreaseValue;
     
     [SerializeField] private BabyValuesScriptableObject _babyValues;
+    [SerializeField] private GameObject _child;
     
     private float _needTimer;
     private BabyStateMachine _stateMachine;
@@ -19,11 +21,16 @@ public class BabyController : MonoBehaviour
         _meshRenderer = GetComponent<MeshRenderer>();
         _stateMachine = new BabyStateMachine(this);
         _pointer = GetComponent<Pointer>();
-        _happinessBar = GetComponentInChildren<Material>();
+        _happinessBar = _child.GetComponent<Renderer>().material;
 
         SetBabyValues();
         UpdateHappinessBar();
         ResetTimer();
+    }
+
+    private void Update()
+    {
+        UpdateHappinessBar();
     }
 
     public void OnObjectMoodEvent()

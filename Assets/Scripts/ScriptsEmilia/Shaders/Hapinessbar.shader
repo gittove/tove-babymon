@@ -67,7 +67,7 @@ Shader "Unlit/Hapinessbar"
 
             float4 frag (Interpolators i) : SV_Target
             {
-                _HappinessValue / 100;
+                _HappinessValue *= 0.01;
                 //set up coord system
                 float2 coords = i.uv;
                 coords.x *= 8;
