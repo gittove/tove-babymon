@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,8 +10,8 @@ public class BabyProfile : MonoBehaviour
     private int[] _objectTicks;
     private int[] _wellbeingTicks;
     private int[] _loveTicks;
-    
-    
+
+
     private float _timer;
     private float _timerResetValue = 0f;
     private float _timerMaxValue = 1f;
@@ -21,20 +20,18 @@ public class BabyProfile : MonoBehaviour
     [SerializeField] private float _love;
     [SerializeField] private float _wellbeing;
     [SerializeField] private bool randomizeStats;
-    
+
     [SerializeField] private ScriptableEvent _objectEvent;
     [SerializeField] private ScriptableEvent _wellbeingEvent;
     [SerializeField] private ScriptableEvent _loveEvent;
     [SerializeField] private BabyValuesScriptableObject _babyValues;
     [SerializeField] private MoodTicks _tickValues;
-    
+
     private void Start()
     {
         _objectTicks = _tickValues.objectTicks;
         _wellbeingTicks = _tickValues.wellbeingTicks;
         _loveTicks = _tickValues.loveTicks;
-
-        ResetTimer();
 
         _objectIndex = 0;
         _wellbeingIndex = 0;
@@ -48,18 +45,7 @@ public class BabyProfile : MonoBehaviour
         {
             SetUpMaxStats();
         }
-    }
-
-    private void Update()
-    {
-        // TODO make this a coroutine
-        _timer += Time.deltaTime;
-
-        if (_timer > _timerMaxValue)
-        {
-            DecreaseStats();
-            ResetTimer();
-        }
+        StartCoroutine(Countdown1());
     }
 
     private void DecreaseStats()
@@ -67,7 +53,7 @@ public class BabyProfile : MonoBehaviour
         _object -= 1 * _babyValues.decreaseStatsMultiplier;
         _love -= 1 * _babyValues.decreaseStatsMultiplier;
         _wellbeing -= 1 * _babyValues.decreaseStatsMultiplier;
-        
+
         MoodCheck();
     }
 
@@ -84,10 +70,6 @@ public class BabyProfile : MonoBehaviour
         _love = _babyValues.maxLove;
         _wellbeing = _babyValues.maxWellbeing;
     }
-
-    // TODO needcheck
-    // important: control that the mood-check only runs ONCE and then changes the criteria ..
-    // .. based on if the need is satisfied or if the mood continues decreasing
 
     private void MoodCheck()
     {
@@ -134,5 +116,14 @@ public class BabyProfile : MonoBehaviour
     private void ResetTimer()
     {
         _timer = _timerResetValue;
+    }
+
+    private IEnumerator Countdown1()
+    {
+        while (true)
+        {
+            DecreaseStats();
+            yield return new WaitForSeconds(1);
+        }
     }
 }
