@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 
 public class BabyController : MonoBehaviour
 {
     private float _timeUntilDecrease;
-    [SerializeField] private float _babyHappiness;
+    // TODO i don't wanna hardcode this range, pls
+    [Range(0, 100)] private float _babyHappiness;
     private float _happyDecreaseValue;
     
     [SerializeField] private BabyValuesScriptableObject _babyValues;
@@ -28,6 +28,8 @@ public class BabyController : MonoBehaviour
         ResetTimer();
     }
 
+    // TODO move this from update
+    // TODO connect happiness sinking to active needs
     private void Update()
     {
         UpdateHappinessBar();
