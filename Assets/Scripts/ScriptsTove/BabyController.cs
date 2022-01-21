@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BabyController : MonoBehaviour
 {
-    private float _newNeedTimer;
     private float _timeUntilDecrease;
     private int _babyHappiness;
     private int _happyDecreaseValue;
+    
     [SerializeField] private BabyValuesScriptableObject _babyValues;
     
     private float _needTimer;
@@ -23,19 +23,19 @@ public class BabyController : MonoBehaviour
         ResetTimer();
     }
 
-    private void Update()
+    public void OnObjectMoodEvent()
     {
-        _needTimer += Time.deltaTime;
-        
-        if (_needTimer > _newNeedTimer)
-        {
-            //debugging
-            Debug.Log("new need added");
-            _meshRenderer.material.SetColor("_Color", Color.cyan);
-            //end of debugging
-            
-            ResetTimer();
-        }
+        _stateMachine.SetObject();
+    }
+
+    public void OnWellbeingMoodEvent()
+    {
+        _stateMachine.SetWellbeing();
+    }
+
+    public void OnLoveMoodEvent()
+    {
+        _stateMachine.SetLove();
     }
 
     private void OnMouseDown()
@@ -44,7 +44,7 @@ public class BabyController : MonoBehaviour
         Debug.Log("baby all good!");
         //end of debugging
         
-        _stateMachine.ReturnToPreviousState();
+        _stateMachine.ReturnObjectState();
     }
 
     private void ResetTimer()
@@ -54,7 +54,6 @@ public class BabyController : MonoBehaviour
 
     private void SetBabyValues()
     {
-        _newNeedTimer = _babyValues.needTimer;
         _babyHappiness = _babyValues.maxHP;
         _happyDecreaseValue = 1;
         _timeUntilDecrease = _babyValues.decreaseHPMultiplier;

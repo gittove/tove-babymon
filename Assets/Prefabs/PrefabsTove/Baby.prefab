@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3951351875096127793}
   - component: {fileID: 3951351875096127798}
   - component: {fileID: 3951351875096127799}
+  - component: {fileID: -984650802259922513}
   m_Layer: 0
   m_Name: Baby
   m_TagString: Untagged
@@ -109,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71450549215d8574b90bf17e32d6187c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineWidth: 0.12
 --- !u!114 &3951351875096127799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +124,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _babyValues: {fileID: 11400000, guid: d44c6f085a89f4845b60b552a52136b9, type: 2}
+  _objectEventListener: {fileID: 0}
+  _wellbeingEventListener: {fileID: 0}
+  _loveEventListener: {fileID: 0}
+--- !u!114 &-984650802259922513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951351875096127796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef28e6df50c55a4ca6553364e64b7de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _object: 0
+  _love: 0
+  _wellbeing: 0
+  randomizeStats: 0
+  _objectEvent: {fileID: 11400000, guid: c02f48dfde85e154fb53fbb90c0a4577, type: 2}
+  _wellbeingEvent: {fileID: 11400000, guid: f532f8b4d591e1e4f9c80df512cebff5, type: 2}
+  _loveEvent: {fileID: 11400000, guid: 89985a6d690d82f4582f77a66107493f, type: 2}
+  _babyValues: {fileID: 11400000, guid: d44c6f085a89f4845b60b552a52136b9, type: 2}
+  _tickValues: {fileID: 11400000, guid: f1a768a7b093b0c438b82e1462697462, type: 2}
