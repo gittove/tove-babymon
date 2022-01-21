@@ -1,6 +1,7 @@
-public enum BabyState
+public enum BabyNeeds
 {
-    Happy,
-    Neutral,
-    Sad
+    None,
+    Food,
+    Toy,
+    Nap
 }

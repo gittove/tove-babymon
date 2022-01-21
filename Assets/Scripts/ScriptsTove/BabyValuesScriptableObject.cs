@@ -11,19 +11,19 @@ public class BabyValuesScriptableObject : ScriptableObject
     [Tooltip("Multiplied by pointvalue. (multiplier * 1 per second)")][Range(0.01f, 1f)] [SerializeField] public float decreaseHPMultiplier;
 
     // TODO: make minimum and maximum values limit eachother
-    [HeaderAttribute("Internal values (hidden from player):")] 
+    [HeaderAttribute("Internal moodvalues (hidden from player):")] 
     
-    [Tooltip("Minimum hunger value:")] [Range(1, 100)] [SerializeField] public int minHunger;
-    [Tooltip("Maximum hunger value:")] [Range(1, 100)] [SerializeField] 
-    public int maxHunger;
-    [Tooltip("Minimum comfort value:")] [Range(1, 100)] [SerializeField]
-    public int minComfort;
-    [Tooltip("Maximum comfort value:")] [Range(1, 100)] [SerializeField] 
-    public int maxComfort;
-    [Tooltip("Minimum love value:")] [Range(1, 100)] [SerializeField]
+    [Tooltip("Minimum object moodvalue:")] [Range(1, 100)] [SerializeField] public int minObject;
+    [Tooltip("Maximum object moodvalue:")] [Range(1, 100)] [SerializeField] 
+    public int maxObject;
+    [Tooltip("Minimum wellbeing  moodvalue:")] [Range(1, 100)] [SerializeField]
+    public int minWellbeing;
+    [Tooltip("Maximum wellbeing moodvalue:")] [Range(1, 100)] [SerializeField] 
+    public int maxWellbeing;
+    [Tooltip("Minimum love moodvalue:")] [Range(1, 100)] [SerializeField]
     public int minLove;
-    [Tooltip("Maximum love value:")] [Range(1, 100)] [SerializeField] 
+    [Tooltip("Maximum love moodvalue:")] [Range(1, 100)] [SerializeField] 
     public int maxLove;
-    [Header("Internal needs decrease multiplier:")] [Range(0.1f, 1f)] [SerializeField] 
+    [Header("Internal mood decrease multiplier:")] [Range(0.1f, 1f)] [SerializeField] 
     public float decreaseStatsMultiplier;
 }

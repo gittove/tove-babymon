@@ -236,7 +236,7 @@ MonoBehaviour:
   _hunger: 0
   _love: 0
   _comfort: 0
-  randomizeStats: 1
+  randomizeStats: 0
   _babyValues: {fileID: 11400000, guid: d44c6f085a89f4845b60b552a52136b9, type: 2}
 --- !u!1 &1930526051
 GameObject:

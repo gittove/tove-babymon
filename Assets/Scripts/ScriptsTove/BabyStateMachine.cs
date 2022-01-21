@@ -2,46 +2,76 @@ using System.Collections.Generic;
 
 public class BabyStateMachine
 {
-    public BabyState currentState;
-
-    private Stack<BabyState> _stateStack;
+    public BabyNeeds currentNeed;
+    
+    // TODO three different stacks
+    private Stack<BabyNeeds> _needStack;
     private BabyController _babyController;
+    private NeedGenerator _generator;
 
     public BabyStateMachine(BabyController controller)
     {
         _babyController = controller;
-        _stateStack = new Stack<BabyState>();
-        currentState = BabyState.Happy;
-        _stateStack.Push(currentState);
+        
+        _needStack = new Stack<BabyNeeds>();
+        currentNeed = BabyNeeds.None;
+        _needStack.Push(currentNeed);
+        
+        _generator = new NeedGenerator();
     }
 
-    public void SetNewState(BabyState newState)
+    public void SetObject()
     {
-        PushState(currentState);
-        currentState = newState;
+        BabyNeeds item;
+        item = _generator.GetObjectItem();
+        SetNewState(item);
     }
     
-    public void ReturnToPreviousState()
+    public void SetLove()
     {
-        currentState = _stateStack.Peek();
-     // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
+        BabyNeeds item;
+        item = _generator.GetLoveItem();
+        SetNewState(item);
+    }
+
+    public void SetWellbeing()
+    {
+        BabyNeeds item;
+        item = _generator.GetWellbeingItem();
+        SetNewState(item);
+    }
+    
+    public void SetNewState(BabyNeeds newNeed)
+    {
+        PushState(currentNeed);
+        
+        // this does not belong here: newNeed = _generator.GetItem();
+        currentNeed = newNeed;
+    }
+
+    public void ReturnToPreviousState()
+    { 
+        _generator.ReturnItem(_needStack.Peek());
+        TryPopStack();
+        currentNeed = _needStack.Peek();
+        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
     }
 
     public void TryPopStack()
     {
-        if (_stateStack.Count > 1)
+        if (_needStack.Count > 1)
         {
-            _stateStack.Pop();
+            _needStack.Pop();
         }
     }
 
-    public void PushState(BabyState stateToStack)
+    public void PushState(BabyNeeds needsToStack)
     {
-        if (stateToStack == _stateStack.Peek())
+        if (needsToStack == _needStack.Peek())
         {
             return;
         }
 
-        _stateStack.Push(stateToStack);
+        _needStack.Push(needsToStack);
     }
 }

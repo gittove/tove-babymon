@@ -6,6 +6,7 @@ public class BabyController : MonoBehaviour
     private float _timeUntilDecrease;
     private int _babyHappiness;
     private int _happyDecreaseValue;
+    
     [SerializeField] private BabyValuesScriptableObject _babyValues;
     
     private float _needTimer;
@@ -22,7 +23,7 @@ public class BabyController : MonoBehaviour
         SetBabyValues();
         ResetTimer();
     }
-
+/*
     private void Update()
     {
         _needTimer += Time.deltaTime;
@@ -30,12 +31,28 @@ public class BabyController : MonoBehaviour
         if (_needTimer > _newNeedTimer)
         {
             //debugging
-            Debug.Log("new need added");
+            _stateMachine.SetObject();
+            Debug.Log("New need:" + _stateMachine.currentNeed);
             _meshRenderer.material.SetColor("_Color", Color.cyan);
             //end of debugging
             
             ResetTimer();
         }
+    }
+*/
+    public void OnObjectMoodEvent()
+    {
+        _stateMachine.SetObject();
+    }
+
+    public void OnWellbeingMoodEvent()
+    {
+        _stateMachine.SetWellbeing();
+    }
+
+    public void OnLoveMoodEvent()
+    {
+        _stateMachine.SetLove();
     }
 
     private void OnMouseDown()
