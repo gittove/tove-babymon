@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseKey: 112
+  pauseObservable: {fileID: 11400000, guid: a60b6f7e6608a81438e7999cff4802a6, type: 2}
   pauseMenuCanvas: {fileID: 5915575524328417561}
   controlsCanvas: {fileID: 5915575524131117594}
-  pauseObservable: {fileID: 11400000, guid: a60b6f7e6608a81438e7999cff4802a6, type: 2}
 --- !u!114 &5915575522577801483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,15 +337,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move with WASD.
+  m_text: 'Move with WASD. Press "P" for pause.
 
-    Interact with ---.
+    Interact with monsters on click.
 
-    Hoover with mouse over monsters
-    to see needs.
+    Hoover
+    with mouse over monsters to see needs.
 
-    Objective: Furfill as many needs as you can befor time runs
-    out and earn coins.'
+    Objective: Furfill as many needs
+    as you can befor time runs out and earn coins.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

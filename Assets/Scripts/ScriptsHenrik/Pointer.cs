@@ -4,44 +4,21 @@ using UnityEngine;
 
 public class Pointer : MonoBehaviour
 {
-    //When the mouse hovers over the GameObject, it turns to this color (red)
-    Color m_MouseOverColor;
-
-    //This stores the GameObject’s original color
-    Color m_OriginalColor;
-
-    //Get the GameObject’s mesh renderer to access the GameObject’s material and color
-    MeshRenderer m_Renderer;
-
-    bool hoover = true;
+    Renderer m_Renderer;
+    [SerializeField] float outlineWidth = 0.12f;
 
     void Start()
     {
-        //Fetch the mesh renderer component from the GameObject
-        m_Renderer = GetComponent<MeshRenderer>();
-        m_MouseOverColor = new Color(1,0,0.7f,0.5f);
-        //Fetch the original color of the GameObject
-        m_OriginalColor = m_Renderer.material.color;
+        m_Renderer = GetComponentInChildren<Renderer>();
     }
 
-    void OnMouseOver()
+    void OnMouseEnter() 
     {
-        // Change the color of the GameObject to red when the mouse is over GameObject
-        m_Renderer.material.color = m_MouseOverColor;
-        
-        if (hoover)
-        {
-            Debug.Log("Baby need 1: Food");
-            Debug.Log("Baby need 2: Diaper change");
-            Debug.Log("Baby need 3: Sleep");
-            hoover = false;
-        }
+        m_Renderer.material.SetFloat("_OutlineWidth", outlineWidth);
     }
 
     void OnMouseExit()
     {
-        hoover = true;
-        // Reset the color of the GameObject back to normal
-        m_Renderer.material.color = m_OriginalColor;
+        m_Renderer.material.SetFloat("_OutlineWidth", 0.0f);    
     }
 }

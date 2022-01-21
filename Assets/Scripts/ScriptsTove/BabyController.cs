@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BabyController : MonoBehaviour
 {
@@ -40,7 +35,6 @@ public class BabyController : MonoBehaviour
             //end of debugging
             
             ResetTimer();
-            _stateMachine.SetNewState(BabyState.Hungry);
         }
     }
 
@@ -62,7 +56,7 @@ public class BabyController : MonoBehaviour
     {
         _newNeedTimer = _babyValues.needTimer;
         _babyHappiness = _babyValues.maxHP;
-        _happyDecreaseValue = _babyValues.decreaseHPValue;
-        _timeUntilDecrease = _babyValues.decreaseHPTimer;
+        _happyDecreaseValue = 1;
+        _timeUntilDecrease = _babyValues.decreaseHPMultiplier;
     }
 }
