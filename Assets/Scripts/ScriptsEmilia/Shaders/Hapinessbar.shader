@@ -67,7 +67,7 @@ Shader "Unlit/Hapinessbar"
 
             float4 frag (Interpolators i) : SV_Target
             {
-                
+                _HappinessValue / 100;
                 //set up coord system
                 float2 coords = i.uv;
                 coords.x *= 8;
@@ -84,17 +84,17 @@ Shader "Unlit/Hapinessbar"
                 //return float4(borderMask.xxx,1);
                 //Use texture
                 //Mask, happiness more than current coord being rendered
-                float happinessbarMask = _Happiness > i.uv.x; 
+                float happinessbarMask = _HappinessValue > i.uv.x; 
                 
-                float3 happinessbarColor = tex2D(_MainTex, float2(_Happiness,i.uv.y));
+                float3 happinessbarColor = tex2D(_MainTex, float2(_HappinessValue,i.uv.y));
 
-                if (_Happiness < 0.3)
+                if (_HappinessValue < 0.3)
                 {
                     //time * frequency * magnitude, +1 scaling to keep saturation
                     float flash = cos(_Time.y * 4) * 0.4 + 1;
                     happinessbarColor *= flash;
                 }
-                if (_Happiness > 0.9)
+                if (_HappinessValue > 0.9)
                 {
                     //math for sparkle???
                     float flash = cos(_Time.y * 4) * 0.4 + 1;
