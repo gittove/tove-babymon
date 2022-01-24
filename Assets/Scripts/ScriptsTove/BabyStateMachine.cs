@@ -86,6 +86,7 @@ public class BabyStateMachine
         _generator.ReturnItem(_wellbeingStack.Peek());
         TryPopStack(_wellbeingStack);
         currentNeed = _wellbeingStack.Peek();
+        _babyController.CurrentBabyNeed = currentNeed;
     }
     
     public void ReturnLoveState()
@@ -93,6 +94,7 @@ public class BabyStateMachine
         _generator.ReturnItem(_loveStack.Peek());
         TryPopStack(_loveStack);
         currentNeed = _loveStack.Peek();
+        _babyController.CurrentBabyNeed = currentNeed;
     }
 
     public Stack<BabyNeeds> TryPopStack(Stack<BabyNeeds> stack)

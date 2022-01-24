@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BabyController : MonoBehaviour
@@ -12,6 +13,9 @@ public class BabyController : MonoBehaviour
     [SerializeField] private GameObject _child;
 
     private BabyNeeds _currentNeed;
+    private ScriptableObjectBehavior _currentObjectBehavior;
+    private ScriptableWellbeingBehavior _currentWellbeingBehavior;
+    private ScriptableLoveBehavior _currentLoveBehavior;
     private MeshRenderer _meshRenderer;
     private Pointer _pointer;
     private Material _happinessBar;
@@ -20,12 +24,9 @@ public class BabyController : MonoBehaviour
     {
         set
         {
-            if (value != _currentNeed)
-            {
-                if (_currentNeed == BabyNeeds.None) StartCoroutine(HappinessBar());
-                else if (value == BabyNeeds.None) StopCoroutine(HappinessBar());
-                _currentNeed = value;
-            }
+            if (_currentNeed == BabyNeeds.None) StartCoroutine(HappinessBar());
+            else if (value == BabyNeeds.None) StopCoroutine(HappinessBar());
+            _currentNeed = value;
         }
     }
 
