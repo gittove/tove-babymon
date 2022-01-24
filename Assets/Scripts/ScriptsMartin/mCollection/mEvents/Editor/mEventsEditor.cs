@@ -87,7 +87,7 @@ public class mEventsEditor : Editor
     {
         serializedObject.Update();
 
-        Title("mEvents");
+        Title(GetTitleText());
 
         float labelWidth = EditorGUIUtility.labelWidth;
 
@@ -125,7 +125,7 @@ public class mEventsEditor : Editor
         }
         if (Monobehaviour)
         {
-            using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox)) 
+            using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
             {
                 index = EditorGUILayout.Popup(index, monoEventsString);
                 if (GUILayout.Button("Add Event", GUILayout.Width(80)))
@@ -153,16 +153,25 @@ public class mEventsEditor : Editor
         }
         if (Settings)
         {
-            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox)) 
+            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 EditorGUIUtility.labelWidth = 80;
                 EditorGUILayout.PropertyField(canTrigger);
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("ID"), new GUIContent("mEvents ID"));
             }
         }
 
         EditorGUIUtility.labelWidth = labelWidth;
 
         serializedObject.ApplyModifiedProperties();
+    }
+
+    private string GetTitleText()
+    {
+        if (serializedObject.FindProperty("ID").stringValue != "")
+            return serializedObject.FindProperty("ID").stringValue;
+        else
+            return "mEvents";
     }
 
     private void DrawMonoBehaviourEvents()

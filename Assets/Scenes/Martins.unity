@@ -269,6 +269,9 @@ MonoBehaviour:
   animateTransform: 0
   transformSizeIdle: {x: 0, y: 0, z: 0}
   transformSizeHover: {x: 0, y: 0, z: 0}
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &592993326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +456,9 @@ MonoBehaviour:
   animateTransform: 0
   transformSizeIdle: {x: 0, y: 0, z: 0}
   transformSizeHover: {x: 0, y: 0, z: 0}
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &701634076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,6 +905,9 @@ MonoBehaviour:
   animateTransform: 0
   transformSizeIdle: {x: 0, y: 0, z: 0}
   transformSizeHover: {x: 0, y: 0, z: 0}
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1144014536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,6 +959,7 @@ GameObject:
   - component: {fileID: 1221105942}
   - component: {fileID: 1221105941}
   - component: {fileID: 1221105945}
+  - component: {fileID: 1221105940}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -957,6 +967,205 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1221105940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221105939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d989d3898b20f42a46afc2ea9b5d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTrigger: 1
+  ID: MyEvent
+  inputEvents: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  layerMask2D:
+    serializedVersion: 2
+    m_Bits: 0
+  monoEvents:
+  - Visible: 0
+    Expanded: 0
+    ID: onAwake
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onStart
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onUpdate
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onLateUpdate
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onFixedUpdate
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onEnable
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onDisable
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onDestroy
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onTriggerEnter
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onTriggerStay
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onTriggerExit
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onTriggerEnter2D
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onTriggerStay2D
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onTriggerExit2D
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onCollisionEnter
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onCollisionStay
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onCollisionExit
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onCollisionEnter2D
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onCollisionStay2D
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onCollisionExit2D
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onMouseEnter
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onMouseOver
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onMouseExit
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onMouseDown
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onMouseUp
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - Visible: 0
+    Expanded: 0
+    ID: onMouseUpAsButton
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  monoEventsDisplay: []
+  currentTab: 0
+  MonoBehaviour: 0
+  triggerType:
+    performAction: 0
+    messageType: 0
+    SendMessage: 0
+    Message: 
+    messageInfoFloat: 0
+    messageInfoInt: 0
+    messageInfoBool: 0
+    messageInfoString: 
+  triggerType2D:
+    performAction: 0
+    messageType: 0
+    SendMessage: 0
+    Message: 
+    messageInfoFloat: 0
+    messageInfoInt: 0
+    messageInfoBool: 0
+    messageInfoString: 
 --- !u!65 &1221105941
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1138,9 +1347,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   time: 0.2
-  animateTransform: 0
+  animateTransform: 1
   transformSizeIdle: {x: 1, y: 1, z: 1}
   transformSizeHover: {x: 1.2, y: 1.2, z: 1.2}
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1386153724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1499,9 @@ MonoBehaviour:
   animateTransform: 0
   transformSizeIdle: {x: 0, y: 0, z: 0}
   transformSizeHover: {x: 0, y: 0, z: 0}
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1386153727
 MonoBehaviour:
   m_ObjectHideFlags: 0
