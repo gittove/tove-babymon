@@ -10,8 +10,7 @@ public class BabyProfile : MonoBehaviour
     private int[] _objectTicks;
     private int[] _wellbeingTicks;
     private int[] _loveTicks;
-
-
+    
     private float _timer;
     private float _timerResetValue = 0f;
     private float _timerMaxValue = 1f;

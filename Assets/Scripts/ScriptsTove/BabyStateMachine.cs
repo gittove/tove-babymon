@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class BabyStateMachine
 {
@@ -10,22 +11,32 @@ public class BabyStateMachine
     private BabyController _babyController;
     private NeedGenerator _generator;
 
+    // TODO the state None can be assigned to the player, even though the player might have active needs in
+    // .. other categories. That is a problem, fix thank
+    
     public BabyStateMachine(BabyController controller)
     {
-        // TODO evaluate if the controller is actually neccessary?
         _babyController = controller;
 
         _objectStack = new Stack<BabyNeeds>();
         _wellbeingStack = new Stack<BabyNeeds>();
         _loveStack = new Stack<BabyNeeds>();
+        
         currentNeed = BabyNeeds.None;
         _loveStack.Push(currentNeed);
+        _objectStack.Push(currentNeed);
+        _wellbeingStack.Push(currentNeed);
         
         _generator = new NeedGenerator();
     }
 
     public void SetObject()
     {
+        if (!_generator.isObjectInList())
+        {
+            Debug.Log("Object list is empty!");
+            return;
+        }
         BabyNeeds item;
         item = _generator.GetObjectItem();
         SetNewState(item, _objectStack);
@@ -33,6 +44,11 @@ public class BabyStateMachine
     
     public void SetLove()
     {
+        if (!_generator.isLoveInList())
+        {
+            Debug.Log("Love list is empty!");
+            return;
+        }
         BabyNeeds item;
         item = _generator.GetLoveItem();
         SetNewState(item, _loveStack);
@@ -40,6 +56,11 @@ public class BabyStateMachine
 
     public void SetWellbeing()
     {
+        if (!_generator.IsWellbeingInList())
+        {
+            Debug.Log("Wellbeing list is empty!");
+            return;
+        }
         BabyNeeds item;
         item = _generator.GetWellbeingItem();
         SetNewState(item, _wellbeingStack);
@@ -48,9 +69,8 @@ public class BabyStateMachine
     public void SetNewState(BabyNeeds newNeed, Stack<BabyNeeds> stack)
     {
         PushState(currentNeed, stack);
-        
-        // this does not belong here: newNeed = _generator.GetItem();
         currentNeed = newNeed;
+        _babyController.CurrentBabyNeed = currentNeed;
     }
 
     public void ReturnObjectState()
@@ -58,7 +78,7 @@ public class BabyStateMachine
         _generator.ReturnItem(_objectStack.Peek());
         TryPopStack(_objectStack);
         currentNeed = _objectStack.Peek();
-        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
+        _babyController.CurrentBabyNeed = currentNeed;
     }
     
     public void ReturnWellbeingState()
@@ -66,7 +86,7 @@ public class BabyStateMachine
         _generator.ReturnItem(_wellbeingStack.Peek());
         TryPopStack(_wellbeingStack);
         currentNeed = _wellbeingStack.Peek();
-        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
+        _babyController.CurrentBabyNeed = currentNeed;
     }
     
     public void ReturnLoveState()
@@ -74,7 +94,7 @@ public class BabyStateMachine
         _generator.ReturnItem(_loveStack.Peek());
         TryPopStack(_loveStack);
         currentNeed = _loveStack.Peek();
-        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
+        _babyController.CurrentBabyNeed = currentNeed;
     }
 
     public Stack<BabyNeeds> TryPopStack(Stack<BabyNeeds> stack)

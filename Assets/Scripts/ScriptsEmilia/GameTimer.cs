@@ -1,13 +1,12 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
     [Header("Timer values, in seconds")]
     [SerializeField,Range(1,180)]
-    public int gameTime; //Todo make to scriptable int?
+    public int gameTime; //Todo make to scriptable int? why tho
     
     [Header("References")]
     [SerializeField] 
@@ -19,6 +18,7 @@ public class GameTimer : MonoBehaviour
     void Start()
     {
         StartTimer(gameTime);
+        isPause = true;
     }
 
     private void StartTimer(int seconds)
@@ -42,7 +42,12 @@ public class GameTimer : MonoBehaviour
         EndRound();
     }
 
-    public void OnGamePause(bool value)
+    public void StartCanvasClose()
+    {
+        isPause = false;
+    }
+    
+    public void GamePause(bool value)
     {
         isPause = value;
     }

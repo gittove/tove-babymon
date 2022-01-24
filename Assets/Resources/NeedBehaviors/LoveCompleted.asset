@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce243c86e948c048925c8adfd94f1cd, type: 3}
-  m_Name: onPauseGameChanged
+  m_Script: {fileID: 11500000, guid: 513f2e87239263c49b9ec732d7cf742f, type: 3}
+  m_Name: LoveCompleted
   m_EditorClassIdentifier: 
