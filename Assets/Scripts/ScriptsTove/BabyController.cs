@@ -1,31 +1,45 @@
+using System.Collections;
 using UnityEngine;
 
 public class BabyController : MonoBehaviour
 {
     private float _timeUntilDecrease;
+
     // TODO i don't wanna hardcode this range, pls
     [Range(0, 100)] private float _babyHappiness;
     private float _happyDecreaseValue;
-    
+
     [SerializeField] private BabyValuesScriptableObject _babyValues;
     [SerializeField] private GameObject _child;
-    
-    private float _needTimer;
+
+    private BabyNeeds _currentNeed;
     private BabyStateMachine _stateMachine;
     private MeshRenderer _meshRenderer;
     private Pointer _pointer;
     private Material _happinessBar;
 
+    public BabyNeeds CurrentBabyNeed
+    {
+        set
+        {
+            if (value != _currentNeed)
+            {
+                if (_currentNeed == BabyNeeds.None) StartCoroutine(HappinessBar());
+                else if (value == BabyNeeds.None) StopCoroutine(HappinessBar());
+                _currentNeed = value;
+            }
+        }
+    }
+
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
-        _stateMachine = new BabyStateMachine(this);
         _pointer = GetComponent<Pointer>();
         _happinessBar = _child.GetComponent<Renderer>().material;
+        _stateMachine = new BabyStateMachine(this);
 
         SetBabyValues();
         UpdateHappinessBar();
-        ResetTimer();
     }
 
     // TODO move this from update
@@ -55,13 +69,8 @@ public class BabyController : MonoBehaviour
         //debugging
         Debug.Log("baby all good!");
         //end of debugging
-        
-        _stateMachine.ReturnObjectState();
-    }
 
-    private void ResetTimer()
-    {
-        _needTimer = 0f;
+        _stateMachine.ReturnObjectState();
     }
 
     private void SetBabyValues()
@@ -74,5 +83,20 @@ public class BabyController : MonoBehaviour
     private void UpdateHappinessBar()
     {
         _happinessBar.SetFloat("_HappinessValue", _babyHappiness);
+    }
+
+    private void DecreaseHappiness()
+    {
+        _babyHappiness -= _happyDecreaseValue;
+    }
+
+    private IEnumerator HappinessBar()
+    {
+        while (true)
+        {
+            DecreaseHappiness();
+            UpdateHappinessBar();
+            yield return new WaitForSeconds(1);
+        }
     }
 }

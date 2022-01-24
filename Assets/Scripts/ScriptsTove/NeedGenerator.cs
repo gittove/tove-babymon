@@ -7,7 +7,7 @@ public class NeedGenerator
     private BabyNeeds[] _objectArr;
     private BabyNeeds[] _wellbeingArr;
     private BabyNeeds[] _loveArr;
-    
+
     private List<BabyNeeds> _openObjectList;
     private List<BabyNeeds> _openLoveList;
     private List<BabyNeeds> _openWellbeingList;
@@ -36,6 +36,7 @@ public class NeedGenerator
         return inList;
     }
 
+    // TODO is this method neccessary?
     public bool IsItemInList(List<BabyNeeds> inList)
     {
         if (inList.Count > 0)
@@ -50,8 +51,21 @@ public class NeedGenerator
         return false;
     }
 
-    // TODO safetycheck for empty list
-    
+    public bool isObjectInList()
+    {
+        return IsItemInList(_openObjectList);
+    }
+
+    public bool IsWellbeingInList()
+    {
+        return IsItemInList(_openWellbeingList);
+    }
+
+    public bool isLoveInList()
+    {
+        return IsItemInList(_openLoveList);
+    }
+
     public BabyNeeds GetObjectItem()
     {
         BabyNeeds item;
@@ -62,7 +76,7 @@ public class NeedGenerator
 
         return item;
     }
-    
+
     public BabyNeeds GetLoveItem()
     {
         BabyNeeds item;
@@ -73,7 +87,7 @@ public class NeedGenerator
 
         return item;
     }
-    
+
     public BabyNeeds GetWellbeingItem()
     {
         BabyNeeds item;
@@ -94,7 +108,7 @@ public class NeedGenerator
             _openObjectList.Add(returnItem);
             Shuffle(_openObjectList);
         }
-        
+
         else if (_loveArr.Contains(returnItem))
         {
             _openLoveList.Add(returnItem);
@@ -135,7 +149,7 @@ public class NeedGenerator
     public List<BabyNeeds> SetLoveList(List<BabyNeeds> inList)
     {
         _loveArr = new BabyNeeds[1] {BabyNeeds.Toy};
-        
+
         for (int i = 0; i < _loveArr.Length; i++)
         {
             inList.Add(_loveArr[i]);
@@ -143,7 +157,7 @@ public class NeedGenerator
 
         return inList;
     }
-    
+
     public List<BabyNeeds> SetComfortList(List<BabyNeeds> inList)
     {
         _wellbeingArr = new BabyNeeds[1] {BabyNeeds.Nap};
