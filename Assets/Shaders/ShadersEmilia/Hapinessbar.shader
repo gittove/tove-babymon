@@ -2,10 +2,11 @@ Shader "Unlit/Hapinessbar"
 {
     Properties
     {
-        [NoScaleOffset]_MainTex ("Texture", 2D) = "black" {}
+        [NoScaleOffset]_MainTex ("Foreground texture", 2D) = "black" {}
+        [NoScaleOffset]_BackgroundTex ("Background texture", 2D) = "black" {}
         _Happiness ("Happiness", Range(0,1)) = 1
-        _LowHappinessColor ("Low happiness color", Color) = (0,0,0,0)
-        _FullHappinessColor ("Full happiness color", Color) = (0,0,0,0)
+//        _LowHappinessColor ("Low happiness color", Color) = (0,0,0,0)
+//        _FullHappinessColor ("Full happiness color", Color) = (0,0,0,0)
         _BarBackgroundColor ("Happinessbar background color", Color) = (0,0,0,0)
         _Transparency ("Color transparency", Range(0,1)) = 1
         _BorderSize("Border Size", Range(0,0.5)) = 0.5
@@ -43,6 +44,7 @@ Shader "Unlit/Hapinessbar"
 
             //Variables
             sampler2D _MainTex;
+            sampler2D _BackgroundTex;
             float _Happiness; 
             float3 _LowHappinessColor;
             float3 _FullHappinessColor;

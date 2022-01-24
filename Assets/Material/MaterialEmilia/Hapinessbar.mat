@@ -64,8 +64,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Happiness: 0.21
-    - _HappinessValue: 0.59
+    - _Happiness: 0.51
+    - _HappinessValue: 0.3
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
