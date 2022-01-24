@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BabyController : MonoBehaviour
 {
-    private float _timeUntilDecrease;
+    private int _timeUntilDecrease;
 
     // TODO i don't wanna hardcode this range, pls
     [Range(0, 100)] private float _babyHappiness;
@@ -41,14 +41,7 @@ public class BabyController : MonoBehaviour
         SetBabyValues();
         UpdateHappinessBar();
     }
-
-    // TODO move this from update
-    // TODO connect happiness sinking to active needs
-    private void Update()
-    {
-        UpdateHappinessBar();
-    }
-
+    
     public void OnObjectMoodEvent()
     {
         _stateMachine.SetObject();
@@ -64,6 +57,21 @@ public class BabyController : MonoBehaviour
         _stateMachine.SetLove();
     }
 
+    public void OnObjectComplete()
+    {
+        _stateMachine.ReturnObjectState();
+    }
+
+    public void OnWellbeingComplete()
+    {
+        _stateMachine.ReturnWellbeingState();
+    }
+
+    public void OnLoveComplete()
+    {
+        _stateMachine.ReturnLoveState();
+    }
+
     private void OnMouseDown()
     {
         //debugging
@@ -76,8 +84,8 @@ public class BabyController : MonoBehaviour
     private void SetBabyValues()
     {
         _babyHappiness = _babyValues.maxHP;
-        _happyDecreaseValue = 1;
-        _timeUntilDecrease = _babyValues.decreaseHPMultiplier;
+        _happyDecreaseValue = 1 * _babyValues.decreaseStatsMultiplier;
+        _timeUntilDecrease = 1;
     }
 
     private void UpdateHappinessBar()
@@ -96,7 +104,7 @@ public class BabyController : MonoBehaviour
         {
             DecreaseHappiness();
             UpdateHappinessBar();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_timeUntilDecrease);
         }
     }
 }
