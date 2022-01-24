@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseHoover : MonoBehaviour
@@ -19,7 +17,7 @@ public class MouseHoover : MonoBehaviour
     [SerializeField] 
     private ScriptableEvent<Vector3> onHooverOverBaby;
 
-    //TODO pause
+    private bool isPause;
     void Start()
     {
         //Fetch the mesh renderer component from the GameObject
@@ -31,25 +29,39 @@ public class MouseHoover : MonoBehaviour
 
     void OnMouseOver()
     {
-        // Change the color of the GameObject to red when the mouse is over GameObject
-        m_Renderer.material.color = m_MouseOverColor;
-        
-        if (hoover)
+        if (!isPause && hoover)
         {
             onHooverOverBaby.RaiseEvent(transform.position);
             Debug.Log("Baby need 1: Food");
             Debug.Log("Baby need 2: Diaper change");
             Debug.Log("Baby need 3: Sleep");
             hoover = false;
+            // Change the color of the GameObject to red when the mouse is over GameObject
+            m_Renderer.material.color = m_MouseOverColor;
         }
     }
 
     void OnMouseExit()
     {
-        onHooverOverBaby.RaiseEvent(transform.position);
-        hoover = true;
-        // Reset the color of the GameObject back to normal
-        m_Renderer.material.color = m_OriginalColor;
+        if (!isPause)
+        {
+            onHooverOverBaby.RaiseEvent(transform.position);
+            hoover = true;
+            // Reset the color of the GameObject back to normal
+            m_Renderer.material.color = m_OriginalColor;
+        }
+    }
+
+    public void ChangePauseState(bool pause) //Todo change method name
+    {
+        if (pause)
+        {
+            isPause = true;
+        }
+        else
+        {
+            isPause = false;
+        }
     }
     
 }

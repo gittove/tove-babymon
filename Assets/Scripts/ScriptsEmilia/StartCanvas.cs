@@ -5,11 +5,11 @@ public class StartCanvas : MonoBehaviour
     [Header("References")]
     [SerializeField] 
     private GameObject startCanvas;
-    
-    [Header("Scriptable object")]
+
+    [Header("Scriptable objects")]
     [SerializeField] 
     private BoolObservable pauseObservable;
-    
+
     private void Start()
     {
         startCanvas.SetActive(true);
