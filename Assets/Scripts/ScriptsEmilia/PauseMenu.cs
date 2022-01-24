@@ -1,64 +1,57 @@
+using System.Collections;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    [Header("Player input for pause")]
-    [SerializeField] 
-    private KeyCode pauseKey;
-    
-    //Observable invoke event whenever pause is changed
-    [Header("Scriptable object")]
-    [SerializeField] 
-    private BoolObservable pauseObservable;
-    
     [Header("References")]
     [SerializeField] 
     private GameObject pauseMenuCanvas;
     [SerializeField] 
     private GameObject controlsCanvas;
     
+    public AnimationCurve animationCurveCanvas;
+    
     private bool isShowingControls;
     
-    private void Start()
+    private void Awake()
     {
         //Todo put in own set up method later?
         pauseMenuCanvas.SetActive(false);
         controlsCanvas.SetActive(false);
         isShowingControls = false;
     }
-    
-    void Update()
+
+    public void ChangeOnPause(bool isPause)
     {
-        if (Input.GetKeyDown(pauseKey))
+        Debug.Log(isPause);
+        if (isPause)
         {
-            if (pauseObservable.Value == true) //Todo more readable with == true?
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
         }
     }
-
     //Todo if continue to use scriptable objects with event listener, keep everything in origin script but add listener to pause observable?
     //Same with what happens on resume
     private void PauseGame()
     {
-        pauseObservable.SetValue(true);
         pauseMenuCanvas.SetActive(true);
-        //pause game timer now done through SO events
-        //pause player movement
-        //pause baby behaviour
-
+        StartCoroutine(TestFadeIn());
+        Debug.Log("pause game");
     }
     
     public void ResumeGame() 
     {
-        pauseObservable.SetValue(false);
         pauseMenuCanvas.SetActive(false);
-        //start game timer
+        Debug.Log("Resume game");
+    }
+
+    public void RestartGame()
+    {
+        Debug.Log("Restart lvl");
+        //Add load the scene, reset everything?
     }
 
     public void ShowControls() //Todo change method name?
@@ -78,5 +71,19 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame() 
     {
         Application.Quit();
+    }
+    
+    private IEnumerator TestFadeIn()
+    {
+        Keyframe frame = animationCurveCanvas[animationCurveCanvas.length - 1];
+        float time = frame.time;
+        float elapsedTime = 0;
+        while (elapsedTime <= time)
+        {
+            elapsedTime += Time.deltaTime;
+            float curveValue = animationCurveCanvas.Evaluate(elapsedTime);
+            pauseMenuCanvas.GetComponent<CanvasGroup>().alpha = curveValue;
+            yield return null;
+        }
     }
 }

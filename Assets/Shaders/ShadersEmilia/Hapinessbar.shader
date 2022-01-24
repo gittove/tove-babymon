@@ -3,15 +3,14 @@ Shader "Unlit/Hapinessbar"
     Properties
     {
         [NoScaleOffset]_MainTex ("Texture", 2D) = "black" {}
-        _HappinessValue ("Happiness", Range(0,1)) = 1
+        _Happiness ("Happiness", Range(0,1)) = 1
         _LowHappinessColor ("Low happiness color", Color) = (0,0,0,0)
         _FullHappinessColor ("Full happiness color", Color) = (0,0,0,0)
         _BarBackgroundColor ("Happinessbar background color", Color) = (0,0,0,0)
         _Transparency ("Color transparency", Range(0,1)) = 1
         _BorderSize("Border Size", Range(0,0.5)) = 0.5
-        
-        
     }
+    
     SubShader
     {
         //Tags { "RenderType"="Opaque" }
@@ -44,7 +43,7 @@ Shader "Unlit/Hapinessbar"
 
             //Variables
             sampler2D _MainTex;
-            float _Happiness; //How to get happiness from script to this var? Also remap to range 0-1?
+            float _Happiness; 
             float3 _LowHappinessColor;
             float3 _FullHappinessColor;
             float3 _BarBackgroundColor;
@@ -67,7 +66,7 @@ Shader "Unlit/Hapinessbar"
 
             float4 frag (Interpolators i) : SV_Target
             {
-                _HappinessValue *= 0.01;
+                 _HappinessValue *= 0.01;
                 
                 //set up coord system
                 float2 coords = i.uv;
@@ -85,17 +84,17 @@ Shader "Unlit/Hapinessbar"
                 //return float4(borderMask.xxx,1);
                 //Use texture
                 //Mask, happiness more than current coord being rendered
-                float happinessbarMask = _HappinessValue > i.uv.x; 
+                float happinessbarMask = _Happiness > i.uv.x; 
                 
-                float3 happinessbarColor = tex2D(_MainTex, float2(_HappinessValue,i.uv.y));
+                float3 happinessbarColor = tex2D(_MainTex, float2(_Happiness,i.uv.y));
 
-                if (_HappinessValue < 0.3)
+                if (_Happiness < 0.3)
                 {
                     //time * frequency * magnitude, +1 scaling to keep saturation
                     float flash = cos(_Time.y * 4) * 0.4 + 1;
                     happinessbarColor *= flash;
                 }
-                if (_HappinessValue > 0.9)
+                if (_Happiness > 0.9)
                 {
                     //math for sparkle???
                     // float flash = cos(_Time.y * 4) * 0.4 + 1;
@@ -103,6 +102,42 @@ Shader "Unlit/Hapinessbar"
                 }
                 
                 return float4(happinessbarColor * happinessbarMask * borderMask, 1);
+                // _HappinessValue *= 0.01;
+                //
+                // //set up coord system
+                // float2 coords = i.uv;
+                // coords.x *= 8;
+                // //rounded corner clipping
+                // float2 pointOnLineSeg = float2(clamp(coords.x, 0.5, 7.5), 0.5);
+                // float sdf = distance(coords, pointOnLineSeg) *2 -1;
+                // clip(-sdf);
+                //
+                // float borderSdf = sdf + _BorderSize;
+                //
+                // float pd = fwidth(borderSdf); //screen space partial derivative
+                // float borderMask = 1-saturate(borderSdf/pd);
+                //
+                // //return float4(borderMask.xxx,1);
+                // //Use texture
+                // //Mask, happiness more than current coord being rendered
+                // float happinessbarMask = _HappinessValue > i.uv.x; 
+                //
+                // float3 happinessbarColor = tex2D(_MainTex, float2(_HappinessValue,i.uv.y));
+                //
+                // if (_HappinessValue < 0.3)
+                // {
+                //     //time * frequency * magnitude, +1 scaling to keep saturation
+                //     float flash = cos(_Time.y * 4) * 0.4 + 1;
+                //     happinessbarColor *= flash;
+                // }
+                // if (_HappinessValue > 0.9)
+                // {
+                //     //math for sparkle???
+                //     // float flash = cos(_Time.y * 4) * 0.4 + 1;
+                //     // happinessbarColor *= flash;
+                // }
+                //
+                // return float4(happinessbarColor * happinessbarMask * borderMask, 1);
             }
             ENDCG
         }
