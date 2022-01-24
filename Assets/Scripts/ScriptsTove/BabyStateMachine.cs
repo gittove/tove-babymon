@@ -11,9 +11,11 @@ public class BabyStateMachine
     private BabyController _babyController;
     private NeedGenerator _generator;
 
+    // TODO the state None can be assigned to the player, even though the player might have active needs in
+    // .. other categories. That is a problem, fix thank
+    
     public BabyStateMachine(BabyController controller)
     {
-        // TODO evaluate if the controller is actually neccessary fetching?
         _babyController = controller;
 
         _objectStack = new Stack<BabyNeeds>();
@@ -77,7 +79,6 @@ public class BabyStateMachine
         TryPopStack(_objectStack);
         currentNeed = _objectStack.Peek();
         _babyController.CurrentBabyNeed = currentNeed;
-        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
     }
     
     public void ReturnWellbeingState()
@@ -85,7 +86,6 @@ public class BabyStateMachine
         _generator.ReturnItem(_wellbeingStack.Peek());
         TryPopStack(_wellbeingStack);
         currentNeed = _wellbeingStack.Peek();
-        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
     }
     
     public void ReturnLoveState()
@@ -93,7 +93,6 @@ public class BabyStateMachine
         _generator.ReturnItem(_loveStack.Peek());
         TryPopStack(_loveStack);
         currentNeed = _loveStack.Peek();
-        // _babyController.CurrentBabyState = currentState; // property if controller needs to know state switch
     }
 
     public Stack<BabyNeeds> TryPopStack(Stack<BabyNeeds> stack)
