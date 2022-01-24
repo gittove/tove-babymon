@@ -8,6 +8,7 @@ using System.Linq;
 public class mEvents : MonoBehaviour
 {
     public bool canTrigger = true;
+    public string ID;
 
     [Serializable] public enum mKeyPress { Down, Up, Hold }
     [Serializable] public struct Combination
@@ -144,6 +145,21 @@ public class mEvents : MonoBehaviour
         monoEvents[2].unityEvent?.Invoke();
     }
 
+    public static void TriggerEvent(string mEventID, string lovalEventID)
+    {
+        mEvents[] events = FindObjectsOfType < mEvents >();
+
+        foreach (mEvents mEvent in events)
+        {
+            if (mEvent.ID != mEventID) continue;
+
+            for (int i = 0; i < mEvent.inputEvents.Count; i++)
+            {
+                if (mEvent.inputEvents[i].ID == lovalEventID)
+                    mEvent.TryTriggerEvent(i);
+            }
+        }
+    }
     public void TriggerEvent(string ID)
     {
         for (int i = 0; i < inputEvents.Count; i++)
