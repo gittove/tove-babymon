@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fcf55ede11c45142bc3133e86aef07a, type: 3}
+  m_Name: NeedsBehaviorsOverview
+  m_EditorClassIdentifier: 
+  objectBehaviors:
+  - {fileID: 11400000, guid: 02f57d73d3f9fea4ca5667b917013889, type: 2}
+  - {fileID: 11400000, guid: eb100ff83e648314fbff2f95da8bd807, type: 2}
+  - {fileID: 11400000, guid: bc64886f5cca1bb4fb57ae0d72bf2044, type: 2}
+  wellbeingBehaviors:
+  - {fileID: 11400000, guid: 3b1e7399116c10e41a64681383cb1df0, type: 2}
+  - {fileID: 11400000, guid: e08d6125ec8eb3140b838f3c4d68a32e, type: 2}
+  - {fileID: 11400000, guid: 6bf16253d30c23240b40a719eefeff48, type: 2}
+  loveBehaviors:
+  - {fileID: 11400000, guid: b1789738bb057b34a844171924a4c6db, type: 2}
+  - {fileID: 11400000, guid: 86943fe51d1f25e46b2fce3bb3b89741, type: 2}
+  - {fileID: 11400000, guid: c9d29f8f501eee64296f26cc272e7509, type: 2}
+  - {fileID: 11400000, guid: e4e329d9f74d3664bbc8fe497f655723, type: 2}
+  idleBehavior: {fileID: 0}
+  objectNeeds: 000000000100000007000000
+  wellbeingNeeds: 000000000200000006000000
+  loveNeeds: 00000000040000000500000003000000

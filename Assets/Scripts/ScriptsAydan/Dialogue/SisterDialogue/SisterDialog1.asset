@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1eda23c5ad4ef4889b8ac1519a1423, type: 3}
+  m_Name: SisterDialog1
+  m_EditorClassIdentifier: 
+  lines:
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 1
+    characterName: Misha
+    text: "Stop dawdling and hurry up, I\u2019m not gonna say it again. "
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 2
+    characterName: Misha
+    text: "You get five minutes. If you\u2019re not dressed by then, you\u2019ll
+      have to sleep here! Tick tock you little fiends. "
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 3
+    characterName: Misha
+    text: '... '
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 4
+    characterName: You
+    text: "Sounds like you\u2019ve had an extra rough day. \r"
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 
+    characterName: Misha
+    text: "Try week. I have an essay due tomorrow, that I haven\u2019t even started
+      on because two certain *someones* can\u2019t be left alone for even a single
+      moment. I\u2019ve barely slept, I haven\u2019t shower and I\u2019ve been eating
+      stupid baby mush for every meal."
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 5
+    characterName: You
+    text: "Oh, but baby mush is great! You should try the ivy berry \u2014"
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 6
+    characterName: Misha
+    text: "Don\u2019t even go there. "
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 7
+    characterName: You
+    text: Where?
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 8
+    characterName: You
+    text: "Sorry, it had to come out. So remind me, why are you doing this again?
+      \r"
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 9
+    characterName: Misha
+    text: "Doing what? \r\n"
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 10
+    characterName: You
+    text: "Overworking yourself like this. You look like you could collapse any second,
+      and I bet you still won\u2019t talk to your parents about it. "
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 11
+    characterName: Misha
+    text: "There\u2019s nothing to talk about. I\u2019m a big sister, with big sister
+      responsibilities. I should be able to handle this much. "
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 12
+    characterName: You
+    text: "Misha \u2014"
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 13
+    characterName: Misha
+    text: "Oh, come now. It\u2019s not even that bad, I promise. I might have exaggerated
+      a little."
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 14
+    characterName: You
+    text: "\u2026 If you say so. "
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 15
+    characterName: Misha
+    text: 'Thank you for looking out for me, though. It means a lot. '
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 21300000, guid: 793e1aa670d29fd4b8f049bb3505ae10, type: 3}
+    DialogID: 16
+    characterName: Misha
+    text: 'Nao! Taro! Say bye-bye to Quin. '
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 17
+    characterName: You
+    text: See you tomorrow big beasts! And try to be nice to your sister, alright?
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1
+  - characterImage: {fileID: 0}
+    DialogID: 18
+    characterName: You
+    text: ...
+    options: []
+    animatorGameObjectName: 
+    animationName: 
+    Expanded: 1

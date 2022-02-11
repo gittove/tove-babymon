@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a0cf288ec1ae042b24003265152582, type: 3}
+  m_Name: EditableBabyValues
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  decreaseHpValue: 1
+  increaseHpValue: 3
+  sadHpValue: 30
+  minObject: 64
+  maxObject: 100
+  minWellbeing: 66
+  maxWellbeing: 100
+  minLove: 69
+  maxLove: 100
+  decreaseStatsMultiplier: 0.43
+  increaseMoodValue: 20
