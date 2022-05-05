@@ -24,8 +24,8 @@ public class BabyEventHandler : MonoBehaviour
     private void Awake()
     {
         _navController = GetComponent<NavMeshAgentController>();
-        _controller    = GetComponent<BabyController>();
-        _profile       = GetComponent<BabyProfile>();
+        _controller = GetComponent<BabyController>();
+        _profile = GetComponent<BabyProfile>();
     }
 
     private void Start()
@@ -58,10 +58,17 @@ public class BabyEventHandler : MonoBehaviour
             _animationManager.SetParameterTrigger("IsHappy");
             StartCoroutine(DelayBabyMovement());
         }
-        if (need == BabyNeeds.Toy) _toyAudioEvent.Invoke();
-        else if (need == BabyNeeds.WantFood) _foodAudioEvent.Invoke();
         
-        // Debug.Log("OnObjectComplete event");
+        if (need == BabyNeeds.Toy)
+        {
+            _toyAudioEvent.Invoke();
+        }
+        
+        else if (need == BabyNeeds.WantFood)
+        {
+            _foodAudioEvent.Invoke();
+        }
+
         _eventParticleSystem.RaiseEvent(Effect.Happy, transform.position);
         
         _profile.IncreaseHappiness(needDivider);
@@ -71,11 +78,25 @@ public class BabyEventHandler : MonoBehaviour
 
     public void OnWellbeingComplete(int needDivider, BabyNeeds need)
     {
-        if (need == BabyNeeds.Burp) _burpAudioEvent.Invoke();
-        else if (need == BabyNeeds.Carry) _happyAudioEvent.Invoke();
+        if (need == BabyNeeds.Burp)
+        {
+            _burpAudioEvent.Invoke();
+        }
         
-        if (need == BabyNeeds.Burp) _eventParticleSystem.RaiseEvent(Effect.Burp, transform.position);
-        else _eventParticleSystem.RaiseEvent(Effect.Happy, transform.position);
+        else if (need == BabyNeeds.Carry)
+        {
+            _happyAudioEvent.Invoke();
+        }
+        
+        if (need == BabyNeeds.Burp)
+        {
+            _eventParticleSystem.RaiseEvent(Effect.Burp, transform.position);
+        }
+        
+        else
+        {
+            _eventParticleSystem.RaiseEvent(Effect.Happy, transform.position);
+        }
         
         _profile.IncreaseHappiness(needDivider);
         _profile.IncreaseWellbeingMood();
@@ -95,8 +116,8 @@ public class BabyEventHandler : MonoBehaviour
     {
         if (isPreference)
         {
-        _animationManager.SetParameterTrigger("isAngry");
-        StartCoroutine(DelayBabyMovement());
+            _animationManager.SetParameterTrigger("isAngry");
+            StartCoroutine(DelayBabyMovement());
         }
         _eventParticleSystem.RaiseEvent(Effect.Fail, transform.position);
         _sadAudioEvent.Invoke();

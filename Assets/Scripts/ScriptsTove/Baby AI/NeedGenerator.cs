@@ -123,15 +123,15 @@ public class NeedGenerator
     public void SetUpLists()
     {
         _openObjectList.Remove(BabyNeeds.None);
-        _objectLookUp   = new List<BabyNeeds>(_openObjectList);
+        _objectLookUp = new List<BabyNeeds>(_openObjectList);
         _openObjectList = Shuffle(_openObjectList);
 
         _openLoveList.Remove(BabyNeeds.None);
-        _loveLookUp   = new List<BabyNeeds>(_openLoveList);
+        _loveLookUp = new List<BabyNeeds>(_openLoveList);
         _openLoveList = Shuffle(_openLoveList);
 
         _openWellbeingList.Remove(BabyNeeds.None);
-        _wellbeingLookUp   = new List<BabyNeeds>(_openWellbeingList);
+        _wellbeingLookUp = new List<BabyNeeds>(_openWellbeingList);
         _openWellbeingList = Shuffle(_openWellbeingList);
     }
 }

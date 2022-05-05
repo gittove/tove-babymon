@@ -18,4 +18,7 @@ public class ScriptableNeedsBehaviors : ScriptableObject
     public List<BabyNeeds> objectNeeds;
     public List<BabyNeeds> wellbeingNeeds;
     public List<BabyNeeds> loveNeeds;
+
+    [Header("Maximum amount of active needs at the same time:")]
+    public int MaxActiveNeeds;
 }

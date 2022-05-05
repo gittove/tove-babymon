@@ -21,7 +21,7 @@ public class BabyNeedHandler
         _wellbeingStack = new Stack<BabyNeeds>();
         _loveStack = new Stack<BabyNeeds>();
 
-        currentNeed          = BabyNeeds.None;
+        currentNeed = BabyNeeds.None;
         _babyController.Idle = BabyNeeds.TotalIdle;
         _loveStack.Push(currentNeed);
         _objectStack.Push(currentNeed);
@@ -36,8 +36,8 @@ public class BabyNeedHandler
             return;
         }
         BabyNeeds item;
-        item                       = _generator.GetObjectItem();
-        currentNeed                = item;
+        item = _generator.GetObjectItem();
+        currentNeed = item;
         _babyController.ObjectNeed = currentNeed;
         PushState(currentNeed, _objectStack);
     }
@@ -49,8 +49,8 @@ public class BabyNeedHandler
             return;
         }
         BabyNeeds item;
-        item                     = _generator.GetLoveItem();
-        currentNeed              = item;
+        item = _generator.GetLoveItem();
+        currentNeed = item;
         _babyController.LoveNeed = currentNeed;
         PushState(currentNeed, _loveStack);
     }
@@ -62,8 +62,8 @@ public class BabyNeedHandler
             return;
         }
         BabyNeeds item;
-        item                          = _generator.GetWellbeingItem();
-        currentNeed                   = item;
+        item = _generator.GetWellbeingItem();
+        currentNeed = item;
         _babyController.WellbeingNeed = currentNeed;
         PushState(currentNeed, _wellbeingStack);
     }
@@ -113,6 +113,7 @@ public class BabyNeedHandler
         {
             stack.Pop();
             _overallStackCount--;
+            BabiesRuntimeSet.RaiseActiveNeedsCountChanged(-1);
         }
         _babyController.ActiveNeeds = _overallStackCount - 3;
     }
@@ -123,8 +124,9 @@ public class BabyNeedHandler
         {
             return;
         }
-
+        
         stack.Push(needsToStack);
+        BabiesRuntimeSet.RaiseActiveNeedsCountChanged(1);
         _overallStackCount++;
         _babyController.ActiveNeeds = _overallStackCount - 3;
     }

@@ -20,7 +20,6 @@ public class BabyController : MonoBehaviour
     private PreferenceType _preferenceType;
     private BabyNeeds _currentNeed;
     
-    
     private ChangeNeedSprites _imageChanger;
     private ScriptableBehaviorBase _currentObjectBehavior;
     private ScriptableBehaviorBase _currentWellbeingBehavior;
@@ -41,8 +40,7 @@ public class BabyController : MonoBehaviour
         _dictionary = new BehaviorDictionary(_overview);
         _needHandler = new BabyNeedHandler(this, _dictionary);
 
-        // TODO hi hello nitpick; right now, a new dictionary is instantiated for each baby. That is not neccessary lmao, this only needs to be instantiated ONCE
-        // this dictionary should maybe be instantiated on start?
+        BabiesRuntimeSet.onValueChanged += GlobalActiveNeedsCheck;
     }
     
     public BehaviorDictionary Dictionary
@@ -67,21 +65,14 @@ public class BabyController : MonoBehaviour
         {
             if (_currentNeed == BabyNeeds.TotalIdle) _profile.StartHPEnumerator();
             
-            _currentNeed           = value;
-            currentObjectNeed     = value;
+            _currentNeed = value;
+            currentObjectNeed = value;
             _currentObjectBehavior = _dictionary.LookUpObject(value);
             
             _imageChanger.ObjectImage = _currentObjectBehavior.UiSprite;
-            objectNeedID              = _currentObjectBehavior.NeedID;
-            _isPreference             = _currentObjectBehavior.IsPreference;
-            _particleEffect           = _currentObjectBehavior.ParticleEffect;
-            
-            // if (_isPreference) _preferenceType = _currentObjectBehavior.PreferenceType;
-
-            // if decision to use separate animations for each state:
-            //_animValue = _currentObjectBehavior.AnimParValue;
-            //_animationManager.SetParameterInt("BabyAnimState", _animValue);
-            // Debug.Log(_currentNeed);
+            objectNeedID = _currentObjectBehavior.NeedID;
+            _isPreference = _currentObjectBehavior.IsPreference;
+            _particleEffect = _currentObjectBehavior.ParticleEffect;
         }
     }
 
@@ -91,17 +82,12 @@ public class BabyController : MonoBehaviour
         {
             if (_currentNeed == BabyNeeds.TotalIdle) _profile.StartHPEnumerator();
             
-            _currentNeed              = value;
-            currentWellbeingNeed     = value;
+            _currentNeed = value;
+            currentWellbeingNeed = value;
             _currentWellbeingBehavior = _dictionary.LookUpWellbeing(value);
             
             _imageChanger.Wellbeing = _currentWellbeingBehavior.UiSprite;
-            wellbeingNeedID        = _currentWellbeingBehavior.NeedID;
-            
-            // if decision to use separate animations for each state:
-            //_animValue = _currentObjectBehavior.AnimParValue;
-            //_animationManager.SetParameterInt("BabyAnimState", _animValue);
-            // Debug.Log(_currentNeed);
+            wellbeingNeedID = _currentWellbeingBehavior.NeedID;
         }
     }
 
@@ -111,17 +97,12 @@ public class BabyController : MonoBehaviour
         {
             if (_currentNeed == BabyNeeds.TotalIdle) _profile.StartHPEnumerator();
             
-            _currentNeed         = value;
-            currentLoveNeed     = value;
+            _currentNeed = value;
+            currentLoveNeed = value;
             _currentLoveBehavior = _dictionary.LookUpLove(value);
             
             _imageChanger.Love = _currentLoveBehavior.UiSprite;
-            loveNeedID        = _currentLoveBehavior.NeedID;
-            
-            // if decision to use separate animations for each state:
-            //_animValue = _currentObjectBehavior.AnimParValue;
-            //_animationManager.SetParameterInt("BabyAnimState", _animValue);
-            // Debug.Log(_currentNeed);
+            loveNeedID = _currentLoveBehavior.NeedID;
         }
     }
 
@@ -141,27 +122,77 @@ public class BabyController : MonoBehaviour
             _eventHandler.OnObjectComplete(_activeNeedsCount, currentObjectNeed, _isPreference);
             return;
         }
+        
         if (_isPreference)
         {
-            if (currentObjectNeed == BabyNeeds.WantFood) objectNeedID     = _foodPreferenceID;
-            else if (currentObjectNeed == BabyNeeds.Toy) objectNeedID = _toyPreferenceID;
+            if (currentObjectNeed == BabyNeeds.WantFood)
+            {
+                objectNeedID = _foodPreferenceID;
+            }
+            
+            else if (currentObjectNeed == BabyNeeds.Toy)
+            {
+                objectNeedID = _toyPreferenceID;
+            }
         }
         
-        if (objectNeedID == actionID) _eventHandler.OnObjectComplete(_activeNeedsCount, currentObjectNeed, _isPreference); 
-        else _eventHandler.OnTaskFailed(_isPreference);
+        if (objectNeedID == actionID)
+        {
+            _eventHandler.OnObjectComplete(_activeNeedsCount, currentObjectNeed, _isPreference);
+        }
+        
+        else
+        {
+            _eventHandler.OnTaskFailed(_isPreference);
+        }
     }
 
     public void OnWellbeingInteract(string actionID)
     {
-        if (wellbeingNeedID == "001") _eventHandler.OnWellbeingComplete(_activeNeedsCount, currentWellbeingNeed);
-        else if (wellbeingNeedID == actionID) _eventHandler.OnWellbeingComplete(_activeNeedsCount, currentWellbeingNeed);
-        else _eventHandler.OnTaskFailed(false);
+        if (wellbeingNeedID == "001")
+        {
+            _eventHandler.OnWellbeingComplete(_activeNeedsCount, currentWellbeingNeed);
+        }
+        
+        else if (wellbeingNeedID == actionID)
+        {
+            _eventHandler.OnWellbeingComplete(_activeNeedsCount, currentWellbeingNeed);
+        }
+        
+        else
+        {
+            _eventHandler.OnTaskFailed(false);
+        }
     }
 
     public void OnLoveInteract(string actionID)
     {
-        if (loveNeedID == "001")_eventHandler.OnLoveComplete(_activeNeedsCount);
-        else if (loveNeedID == actionID) _eventHandler.OnLoveComplete(_activeNeedsCount);
-        else _eventHandler.OnTaskFailed(false);
+        if (loveNeedID == "001")
+        {
+            _eventHandler.OnLoveComplete(_activeNeedsCount);
+        }
+        
+        else if (loveNeedID == actionID)
+        {
+            _eventHandler.OnLoveComplete(_activeNeedsCount);
+        }
+        
+        else
+        {
+            _eventHandler.OnTaskFailed(false);
+        }
+    }
+
+    private void GlobalActiveNeedsCheck(int value)
+    {
+        if (!_profile.ActiveNeedsCountMaxed && value >= _overview.MaxActiveNeeds)
+        {
+            _profile.ActiveNeedsCountMaxed = true;
+        }
+        
+        else if (_profile.ActiveNeedsCountMaxed && value < _overview.MaxActiveNeeds)
+        {
+            _profile.ActiveNeedsCountMaxed = false;
+        }
     }
 }

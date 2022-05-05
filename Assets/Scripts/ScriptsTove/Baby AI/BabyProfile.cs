@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class BabyProfile : MonoBehaviour
 {
     [FormerlySerializedAs("_babyHappiness")] public float babyHappiness;
+    [NonSerialized] public bool ActiveNeedsCountMaxed;
     
     private int _timeUntilDecrease;
     [SerializeField] private int _objectIndex;
@@ -54,27 +55,27 @@ public class BabyProfile : MonoBehaviour
 
     private void Awake()
     {
-        _renderer     = _child.GetComponent<MeshRenderer>();
+        _renderer = _child.GetComponent<MeshRenderer>();
         _eventHandler = GetComponent<BabyEventHandler>();
-        _mpb          = new MaterialPropertyBlock();
-
-       // _needIsActive = false;
+        _mpb = new MaterialPropertyBlock();
     }
 
     private void Start()
     {
-        _objectTicks    = _tickValues.objectTicks;
+        ActiveNeedsCountMaxed = false;
+        
+        _objectTicks = _tickValues.objectTicks;
         _wellbeingTicks = _tickValues.wellbeingTicks;
-        _loveTicks      = _tickValues.loveTicks;
+        _loveTicks = _tickValues.loveTicks;
 
-        _objectIndexMaxed    = false;
+        _objectIndexMaxed = false;
         _wellbeingIndexMaxed = false;
-        _loveIndexMaxed      = false;
-        _isSad               = false;
+        _loveIndexMaxed = false;
+        _isSad = false;
 
-        _objectIndex    = 0;
+        _objectIndex = 0;
         _wellbeingIndex = 0;
-        _loveIndex      = 0;
+        _loveIndex = 0;
         
         _sadRing.SetActive(false);
 
@@ -87,7 +88,7 @@ public class BabyProfile : MonoBehaviour
             SetUpMaxStats();
         }
         UpdateHappinessBar();
-        MoodCoroutine = StartCoroutine(Countdown1());
+        MoodCoroutine = StartCoroutine(DecreaseMoodCoroutine());
     }
 
     private void Update()
@@ -110,10 +111,10 @@ public class BabyProfile : MonoBehaviour
 
     private void DecreaseStats()
     {
-        _object    -= 1 * _babyValues.decreaseStatsMultiplier;
-        _object    =  Mathf.Clamp(_object, 0, _maxObject);
-        _love      -= 1 * _babyValues.decreaseStatsMultiplier;
-        _love      =  Mathf.Clamp(_love, 0, _maxLove);
+        _object -= 1 * _babyValues.decreaseStatsMultiplier;
+        _object =  Mathf.Clamp(_object, 0, _maxObject);
+        _love -= 1 * _babyValues.decreaseStatsMultiplier;
+        _love =  Mathf.Clamp(_love, 0, _maxLove);
         _wellbeing -= 1 * _babyValues.decreaseStatsMultiplier;
         _wellbeing =  Mathf.Clamp(_wellbeing, 0, _maxWellbeing);
         
@@ -122,43 +123,42 @@ public class BabyProfile : MonoBehaviour
 
     private void SetUpRandomStats()
     {
-        _maxObject          = _babyValues.maxObject;
-        _maxWellbeing       = _babyValues.maxWellbeing;
-        _maxLove            = _babyValues.maxLove;
-        _object             = Random.Range(_babyValues.minObject, _babyValues.maxObject);
-        _love               = Random.Range(_babyValues.minLove, _babyValues.maxLove);
-        _wellbeing          = Random.Range(_babyValues.minWellbeing, _babyValues.maxWellbeing);
-        _maxHP              = _babyValues.maxHP;
-        babyHappiness      = _maxHP;
+        _maxObject = _babyValues.maxObject;
+        _maxWellbeing = _babyValues.maxWellbeing;
+        _maxLove = _babyValues.maxLove;
+        _object = Random.Range(_babyValues.minObject, _babyValues.maxObject);
+        _love = Random.Range(_babyValues.minLove, _babyValues.maxLove);
+        _wellbeing = Random.Range(_babyValues.minWellbeing, _babyValues.maxWellbeing);
+        _maxHP = _babyValues.maxHP;
+        babyHappiness = _maxHP;
         _happyDecreaseValue = 1 * _babyValues.decreaseHpValue;
         _happyIncreaseValue = _babyValues.increaseHpValue;
-        _moodIncreaseValue  = _babyValues.increaseMoodValue;
-        _timeUntilDecrease  = 1;
-        _sadLimit           = _babyValues.sadHpValue;
+        _moodIncreaseValue = _babyValues.increaseMoodValue;
+        _timeUntilDecrease = 1;
+        _sadLimit = _babyValues.sadHpValue;
     }
 
     private void SetUpMaxStats()
     {
-        _maxObject          = _babyValues.maxObject;
-        _maxWellbeing       = _babyValues.maxWellbeing;
-        _maxLove            = _babyValues.maxLove;
-        _object             = _maxObject;
-        _wellbeing          = _maxWellbeing;
-        _love               = _maxLove;
-        _maxHP              = _babyValues.maxHP;
-        babyHappiness      = _maxHP;
+        _maxObject = _babyValues.maxObject;
+        _maxWellbeing = _babyValues.maxWellbeing;
+        _maxLove = _babyValues.maxLove;
+        _object = _maxObject;
+        _wellbeing = _maxWellbeing;
+        _love = _maxLove;
+        _maxHP = _babyValues.maxHP;
+        babyHappiness = _maxHP;
         _happyDecreaseValue = 1 * _babyValues.decreaseHpValue;
         _happyIncreaseValue = _babyValues.increaseHpValue;
-        _moodIncreaseValue  = _babyValues.increaseMoodValue;
-        _timeUntilDecrease  = 1;
-        _sadLimit           = _babyValues.sadHpValue;
+        _moodIncreaseValue = _babyValues.increaseMoodValue;
+        _timeUntilDecrease = 1;
+        _sadLimit = _babyValues.sadHpValue;
     }
 
     private void MoodCheck()
     {
         if (!_objectIndexMaxed && _object < _objectTicks[_objectIndex])
         {
-            // Debug.Log("Object event raised");
             _eventHandler.OnObjectMood();
             if (_objectIndex < _objectTicks.Length - 1)
             {
@@ -169,7 +169,6 @@ public class BabyProfile : MonoBehaviour
         
         if (!_wellbeingIndexMaxed && _wellbeing < _wellbeingTicks[_wellbeingIndex])
         {
-            // Debug.Log("Wellbeing event raised");
             _eventHandler.OnWellbeingMood();
 
             if (_wellbeingIndex < _wellbeingTicks.Length - 1)
@@ -182,7 +181,6 @@ public class BabyProfile : MonoBehaviour
         
         if (!_loveIndexMaxed && _love < _loveTicks[_loveIndex])
         {
-            // Debug.Log("Love event raised");
             _eventHandler.OnLoveMood();
             if (_loveIndex < _loveTicks.Length - 1)
             {
@@ -230,9 +228,19 @@ public class BabyProfile : MonoBehaviour
 
     public void IncreaseObjectMood()
     {
-        if (_objectIndex == 0) _object = _maxObject;
-        else if (!_objectIndexMaxed) _object += _objectTicks[_objectIndex - 1] + _moodIncreaseValue;
-        else _object                    += _objectTicks[_objectIndex] + _moodIncreaseValue;
+        if (_objectIndex == 0)
+        {
+            _object = _maxObject;
+        }
+        else if (!_objectIndexMaxed)
+        {
+            _object += _objectTicks[_objectIndex - 1] + _moodIncreaseValue;
+        }
+        else
+        {
+            _object += _objectTicks[_objectIndex] + _moodIncreaseValue;
+        }
+        
         _object =  Mathf.Clamp(_object, 0, _maxObject);
         int tempIndex = _objectIndex;
 
@@ -248,9 +256,19 @@ public class BabyProfile : MonoBehaviour
 
     public void IncreaseWellbeingMood()
     {
-        if (_wellbeingIndex == 0) _wellbeing = _maxWellbeing;
-        else if (!_wellbeingIndexMaxed) _wellbeing += _wellbeingTicks[_wellbeingIndex - 1] + _moodIncreaseValue;
-        else _wellbeing                       += _wellbeingTicks[_wellbeingIndex] + _moodIncreaseValue;
+        if (_wellbeingIndex == 0)
+        {
+            _wellbeing = _maxWellbeing;
+        }
+        else if (!_wellbeingIndexMaxed)
+        {
+            _wellbeing += _wellbeingTicks[_wellbeingIndex - 1] + _moodIncreaseValue;
+        }
+        else
+        {
+            _wellbeing += _wellbeingTicks[_wellbeingIndex] + _moodIncreaseValue;
+        }
+        
         _wellbeing =  Mathf.Clamp(_wellbeing, 0, _maxWellbeing);
         int tempIndex = _wellbeingIndex;
 
@@ -266,9 +284,19 @@ public class BabyProfile : MonoBehaviour
 
     public void IncreaseLoveMood()
     {
-        if (_loveIndex == 0) _love = _maxLove;
-        else if (!_loveIndexMaxed) _love += _loveTicks[_loveIndex - 1] + _moodIncreaseValue;
-        else _love                  += _loveTicks[_loveIndex] + _moodIncreaseValue;
+        if (_loveIndex == 0)
+        {
+            _love = _maxLove;
+        }
+        else if (!_loveIndexMaxed)
+        {
+            _love += _loveTicks[_loveIndex - 1] + _moodIncreaseValue;
+        }
+        else
+        {
+            _love += _loveTicks[_loveIndex] + _moodIncreaseValue;
+        }
+        
         _love =  Mathf.Clamp(_love, 0, _maxLove);
         int tempIndex = _loveIndex;
 
@@ -300,7 +328,7 @@ public class BabyProfile : MonoBehaviour
                 HPCoroutine = StartCoroutine(HappinessBar());
             }
 
-            MoodCoroutine = StartCoroutine(Countdown1());
+            MoodCoroutine = StartCoroutine(DecreaseMoodCoroutine());
         }
     }
 
@@ -313,15 +341,21 @@ public class BabyProfile : MonoBehaviour
     public void StopHPEnumerator()
     {
         _needIsActive = false;
-        if (HPCoroutine != null) StopCoroutine(HPCoroutine);
+        if (HPCoroutine != null)
+        {
+            StopCoroutine(HPCoroutine);
+        }
     }
 
-    private IEnumerator Countdown1()
+    private IEnumerator DecreaseMoodCoroutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(_timeUntilDecrease);
-            DecreaseStats();
+            if (!ActiveNeedsCountMaxed)
+            {
+                DecreaseStats();
+            }
             yield return null;
         }
     }

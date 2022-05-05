@@ -16,11 +16,11 @@ MonoBehaviour:
   decreaseHpValue: 1
   increaseHpValue: 3
   sadHpValue: 30
-  minObject: 64
+  minObject: 75
   maxObject: 100
-  minWellbeing: 66
+  minWellbeing: 90
   maxWellbeing: 100
-  minLove: 69
+  minLove: 70
   maxLove: 100
   decreaseStatsMultiplier: 0.43
   increaseMoodValue: 20
