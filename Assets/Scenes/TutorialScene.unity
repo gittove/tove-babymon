@@ -1148,6 +1148,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 916046347779493403, guid: c907ca3eb0b519b46bd69525262dadbe, type: 3}
+      propertyPath: tutorialTexts.Array.data[0]
+      value: 'Stay close to the baby to interact.
+
+        Press 1 to fulfill need.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 916046347779493403, guid: c907ca3eb0b519b46bd69525262dadbe, type: 3}
+      propertyPath: tutorialTexts.Array.data[2]
+      value: "This need takes a little longer. \nHold down 1 to sing for the baby."
+      objectReference: {fileID: 0}
     - target: {fileID: 916046348074901538, guid: c907ca3eb0b519b46bd69525262dadbe, type: 3}
       propertyPath: m_RootOrder
       value: 1
