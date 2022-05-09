@@ -29,6 +29,7 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private UnityEvent _pickUpAudioEvent;
     private Material _keyBarMat;
     private BabyController _controller;
+    private NavMeshAgentController _babyNavController;
     private CollisionDetector _detector;
     private GameObject _grabber;
     private Collider _baby;
@@ -36,14 +37,14 @@ public class PlayerInteractor : MonoBehaviour
     private void Awake()
     {
         _keyBarMat = _holdKeyBar.GetComponent<Image>().material;
-        _detector  = GetComponent<CollisionDetector>();
+        _detector = GetComponent<CollisionDetector>();
 
-        _holdTime            = _holdDownKeyTime.Value;
-        timer                = _startTime;
-        _actionID            = null;
+        _holdTime = _holdDownKeyTime.Value;
+        timer = _startTime;
+        _actionID = null;
         _readyForInteraction = true;
-        isHoldingBaby        = false;
-        _babyInRange         = false;
+        isHoldingBaby = false;
+        _babyInRange = false;
 
         _keyBarMat.SetFloat("_StartTime", _holdTime);
         _holdKeyCanvas.SetActive(false);
@@ -111,9 +112,9 @@ public class PlayerInteractor : MonoBehaviour
         if (_controller.currentLoveNeed == BabyNeeds.ReadStory) _stopBookAudioEvent.Invoke();
         else if (_controller.currentLoveNeed == BabyNeeds.SingSong) _stopSingSongAudioEvent.Invoke();
         
-        _readyForInteraction                                    = true;
+        _readyForInteraction = true;
         _baby.gameObject.GetComponent<NavMeshAgent>().isStopped = false;
-        timer                                                   = _startTime;
+        timer = _startTime;
         _holdKeyCanvas.SetActive(false);
     }
 
@@ -143,6 +144,8 @@ public class PlayerInteractor : MonoBehaviour
             _actionID = _detector.playerID;
 
             _controller = collisionInfo.gameObject.GetComponent<BabyController>();
+            _babyNavController = collisionInfo.gameObject.GetComponent<NavMeshAgentController>();
+            _babyNavController.Pause();
         }
     }
 
@@ -150,7 +153,7 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (collisionInfo.gameObject.CompareTag("Baby"))
         {
-            _baby        = collisionInfo;
+            _baby = collisionInfo;
             _babyInRange = true;
         }
     }
@@ -160,6 +163,7 @@ public class PlayerInteractor : MonoBehaviour
         if (collisionInfo.gameObject.CompareTag("Baby"))
         {
             _babyInRange = false;
+            _babyNavController.paused = false;
         }
     }
 }

@@ -251,6 +251,11 @@ public class CollisionDetector : MonoBehaviour
 
     public void OnPickupBaby()
     {
+        if (Baby.GetComponent<NavMeshAgentController>().paused)
+        {
+            Baby.GetComponent<NavMeshAgentController>().paused = false;
+        }
+        
         GetComponent<PlayerInteractor>().isHoldingBaby         = true;
         isHoldingBaby                                          = true;
         _carryBabyBarCanvas.SetActive(true);

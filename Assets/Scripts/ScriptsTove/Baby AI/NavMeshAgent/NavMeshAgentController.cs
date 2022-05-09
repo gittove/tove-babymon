@@ -16,6 +16,7 @@ public class NavMeshAgentController : MonoBehaviour
     public UnityEvent navMeshReleased;
     [HideInInspector] public bool wantPickUp;
     [HideInInspector] public bool isPickedUp;
+    [HideInInspector] public bool paused;
 
     [Header("Length of pathfinding (in units)")]
     [SerializeField][Range(1,10)] private int _pathLength;
@@ -25,20 +26,22 @@ public class NavMeshAgentController : MonoBehaviour
     private bool _isGrounded;
     private bool _isMoving;
     private bool _test;
+    private bool _isObserving;
     private NavMeshStates _currentState;
     private NavMeshStates[] _actionProbability;
     public Vector3 _nextDirection;
 
     private void Awake()
     {
-        navMeshAgent       = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         _actionProbability = new NavMeshStates[4] {NavMeshStates.Idle, NavMeshStates.Idle, NavMeshStates.Idle, NavMeshStates.Patrol};
 
-        _isMoving      = false;
+        _isMoving = false;
+        paused = false;
         _nextDirection = transform.position;
-        _isGrounded    = true;
-        wantPickUp     = false;
-        _test           = true;
+        _isGrounded = true;
+        wantPickUp = false;
+        _test = true;
     }
 
     private void Update()
@@ -50,7 +53,7 @@ public class NavMeshAgentController : MonoBehaviour
         if (_currentState != NavMeshStates.Idle && !_destinationReached && !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
             _destinationReached = true;
-            _isMoving           = false;
+            _isMoving = false;
             StartCoroutine(BeIdle(2f));
         }
     }
@@ -81,8 +84,33 @@ public class NavMeshAgentController : MonoBehaviour
     private void Patrol(Vector3 destination)
     {
         _destinationReached = false;
-        _isMoving           = true;
+        _isMoving = true;
         navMeshAgent.SetDestination(destination);
+    }
+
+    public void Pause()
+    {
+        navMeshAgent.isStopped = true;
+        paused = true;
+        StartCoroutine("Pausing");
+    }
+
+    private IEnumerator Pausing()
+    {
+        float _elapsedTime = 0f;
+        float _pauseTime = 2f;
+
+        while (paused && _elapsedTime <= _pauseTime)
+        {
+            _elapsedTime += Time.deltaTime;
+            yield return Time.deltaTime;
+        }
+
+        navMeshAgent.isStopped = false;
+        if (paused)
+        {
+            paused = false;
+        }
     }
 
     private IEnumerator BeIdle(float time)
@@ -117,11 +145,11 @@ public class NavMeshAgentController : MonoBehaviour
         {
             if (_test && wantPickUp)
             {
-                _currentState         = NavMeshStates.Idle;
+                _currentState = NavMeshStates.Idle;
                 navMeshAgent.areaMask = NavMesh.AllAreas;
-                navMeshAgent.enabled  = false;
+                navMeshAgent.enabled = false;
                 navMeshReleased.Invoke();
-                _test      = false;
+                _test = false;
                 isPickedUp = true;
                 return false;
             }
