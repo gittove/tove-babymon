@@ -17,6 +17,7 @@ public class PlayerInteractor : MonoBehaviour
     private bool _babyInRange;
     private bool _readyForInteraction;
     private bool _isHolding;
+    private bool _isInteracting;
     private string _actionID;
 
     [SerializeField] private GameObject _holdKeyCanvas;
@@ -45,6 +46,7 @@ public class PlayerInteractor : MonoBehaviour
         _readyForInteraction = true;
         isHoldingBaby = false;
         _babyInRange = false;
+        _isInteracting = false;
 
         _keyBarMat.SetFloat("_StartTime", _holdTime);
         _holdKeyCanvas.SetActive(false);
@@ -54,12 +56,12 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (_babyInRange)
         {
-            if (!isHoldingBaby && Input.GetKeyDown(objectInteractKey))
+            if (!isHoldingBaby && _readyForInteraction && Input.GetKeyDown(objectInteractKey))
             {
                 _controller.OnObjectInteract(_actionID);
             }
 
-            else if (!isHoldingBaby && Input.GetKeyDown(wellbeingInteractKey))
+            else if (!isHoldingBaby && _readyForInteraction && Input.GetKeyDown(wellbeingInteractKey))
             {
                 if (_controller.currentWellbeingNeed == BabyNeeds.Carry)
                 {
@@ -71,7 +73,7 @@ public class PlayerInteractor : MonoBehaviour
                 _controller.OnWellbeingInteract(_actionID);
             }
             
-            else if (!isHoldingBaby && Input.GetKey(loveInteractKey))
+            else if (!isHoldingBaby && _readyForInteraction && Input.GetKey(loveInteractKey))
             {
                 if (!_readyForInteraction)
                 {
